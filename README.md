@@ -27,7 +27,7 @@ Ez a repository a kezdő Python kurzushoz első stream-jéhez jött létre. Itt 
     cd path/to/repo/python_hu
     ```
 
-3. Telepítsd a szükséges csomagokat (ha vannak):
+3. Telepítsd a szükséges csomagokat egy virtual environment-be, ha szükséges (ahogy az órán tanultuk):
 
     ```bash
     pip install -r requirements.txt
