@@ -7,11 +7,10 @@ Python
 program
 """
 
-print("1") # intiger
+print(1) # integer
 
-print("1.001") #float
+print(1.001) #floating point number
 
 print("Hello") #string
 
-print("True") #boolean
-
+print(True) #boolean
