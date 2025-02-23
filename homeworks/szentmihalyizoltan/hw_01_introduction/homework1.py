@@ -2,6 +2,7 @@
 This is my first Python
 program
 """
+#primitív adattípusok:
 
 print("String") #String
 print(1)        #Intiger
