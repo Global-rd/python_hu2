@@ -11,4 +11,5 @@ print(None) #informacio hianya
 """
 remélem, hogy
 nem maradt ki semmi
+push
 """
