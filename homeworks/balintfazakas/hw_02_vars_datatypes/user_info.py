@@ -18,7 +18,7 @@ user_info = {
 #1. Ask four programming language and convert string to list, divided by comma
 skills = input("Give 4 programming languages you are aware of: ").title().split(",")
 user_info["skills"] = skills
-print(user_info["skills"].sort()) #printing in alphabetic order
+print(user_info["skills"].sort())
 
 #2. Arrange the favourite meals in ascending order
 user_info["favourite_meals"].sort()
