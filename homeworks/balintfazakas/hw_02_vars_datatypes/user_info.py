@@ -55,12 +55,7 @@ user_info["phone_contacts"]["Bob"] = "+36301234567"
 print("----------------")
 print(user_info["phone_contacts"])
 
-#9/1. Delete Tim's phone number from the phone book
-user_info["phone_contacts"]["Tim"] = None
-print("----------------")
-print(user_info["phone_contacts"])
-
-#9/2. Delete Tim from the phone book
+#9. Delete Tim from the phone book
 del user_info["phone_contacts"]["Tim"]
 print("----------------")
 print(user_info["phone_contacts"])

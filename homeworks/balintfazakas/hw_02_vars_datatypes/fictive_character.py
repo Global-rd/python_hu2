@@ -23,14 +23,11 @@ goal_var = "wants" if goal == "yes" else "does not want"
 gender_var = "He" if gender == "male" else "She"
 
 #Ternary operator for gender 2
-gender_var2 = "he" if gender == "male" else "she"
-
-#Ternary operator for gender 3
-gender_var3 = "His" if gender == "male" else "Her"
+gender_var2 = "His" if gender == "male" else "Her"
 
 #Summary of the character
 print("----------------")
-print(f"My character is {ageindays} days old. {gender_var3} name is {name} and {gender_var2} has {exp} years experience. {gender_var} {goal_var} to be a Python developer!")
+print(f"My character is {ageindays} days old. {gender_var2} name is {name} and {gender_var.lower()} has {exp} years experience in Python programming. {gender_var} {goal_var} to be a Python developer!")
 
 #check data types
 print("----------------")
