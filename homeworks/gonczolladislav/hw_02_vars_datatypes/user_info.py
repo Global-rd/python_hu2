@@ -15,13 +15,13 @@ user_info = {
 }
 
 #1. Bekérjük a felhasználótól a programozási nyelveket
-nyelvek = input("Kérlek, adj meg 4 programozási nyelvet vesszővel elválasztva: ")
+language_list = input("Kérlek, adj meg 4 programozási nyelvet vesszővel elválasztva: ")
 
 # A stringet listává alakítjuk
-nyelvek_lista = nyelvek.split(",")
+language_list = language_list.split(",")
 
 # Hozzáadjuk a "skills" kulcsot és a listát a dictionary-hez
-user_info["skills"] = nyelvek_lista
+user_info["skills"] = language_list
 print("1.feladat:")
 print(user_info)
 
