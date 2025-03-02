@@ -57,6 +57,14 @@ user_info["phone_contacts"].pop("Tim")
 print(f"9. {user_info["phone_contacts"]}")
 
 # 10.
-#user_info["phone_contacts"].update({"Adam": "[+368099999, +3690999999]"})
 user_info["phone_contacts"].update({"Adam": ["+368099999", "+3690999999"]})
 print(f"10. {user_info["phone_contacts"]}")
+
+# Extra 1.
+Last3_list = list(user_info["skills"][-3:])
+Last3_list.reverse()
+print(Last3_list)
+
+# Extra 2.
+user_info["phone_contacts"]["Tim"] = user_info["phone_contacts"].pop("Tim2")
+print(user_info["phone_contacts"])
