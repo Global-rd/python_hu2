@@ -41,7 +41,7 @@ user_info["favourite_meals"].append("spaghetti")
 print("-------------------------")
 
 #5. Harmadik és negyedik elem hozzáadása újra
-user_info["favourite_meals"].extend(["sushi", "spaghetti"])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 print(user_info["favourite_meals"])
 
 print("-------------------------")
