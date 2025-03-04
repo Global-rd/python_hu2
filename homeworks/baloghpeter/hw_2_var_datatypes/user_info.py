@@ -13,26 +13,12 @@ user_info = {
 "Jim": "+364005000"
 }
 }
-user_info = {
-"name": "Mike",
-"age": 25,
-"favourite_meals": [
-"pizza",
-"carbonara",
-"sushi"
-],
-"phone_contacts": {
-"Mary": "+36701234567",
-"Tim": "+36207654321",
-"Tim2": "+36304567321",
-"Jim": "+364005000"
-}
-}
-print("----------")
-nyelvek = input("Adj meg 4 programozási nyelvet: ")
-nyelvek_lista = nyelvek.split(",")
 
-user_info["skills"] = nyelvek_lista
+print("----------")
+prog_languages = input("Adj meg 4 programozási nyelvet: ")
+prog_languages_lista = prog_languages.split(",")
+
+user_info["skills"] = prog_languages_lista
 print("1.feladat:")
 print(user_info)
 
