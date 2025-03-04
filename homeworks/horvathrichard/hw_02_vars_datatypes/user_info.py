@@ -59,7 +59,7 @@ del user_info["phone_contacts"]["Tim"]
 print(user_info)
 
 # 10. Adj hozzá egy olyan új embert “phone_contacts”-hoz, akinek 2 telefonszáma is van!
-user_info["phone_contacts"]["Daniel"] = "+364005002", "+364005003"
+user_info["phone_contacts"]["Daniel"] = ["+364005002", "+364005003"]
 print(user_info)
 
 
@@ -69,3 +69,6 @@ print(user_info["skills"][-1:-4:-1])
 # Extra 2: Most, hogy Tim-nek már csak 1 telefonszáma van, érdemes lenne átnevezni Tim2-t Tim-re!
 user_info["phone_contacts"]["Tim"] = user_info["phone_contacts"].pop("Tim2") # a poppal átrakjuk Tim2 telefonszámát a Tim-hez
 print(user_info)
+
+print("-------")
+print(type(user_info["phone_contacts"]["Daniel"]))

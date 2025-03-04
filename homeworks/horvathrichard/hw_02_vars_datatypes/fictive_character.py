@@ -11,10 +11,9 @@ age_days = age*365
 pro_python = input("Do you want to be a professional python developer? (yes/no): ").strip().lower()
 
 #változó beállítása a ternary operator alapján
-pro_python_yes = True if pro_python == "yes" else False
+pro_python_quote = "wants" if pro_python == "yes" else "does not want"
 
 print("------------------------------")
 #és most kiprinteljük fstringgel
-print(f"My character is {age_days} days old. His/her name is {name} and he/she has {python} years experience. He/she {'wants' if pro_python_yes else 'does not want'} to be a Python developer!")
-
+print(f"My character is {age_days} days old. His/her name is {name} and he/she has {python} years experience. He/she {pro_python_quote} to be a Python developer!")
 print("------------------------------")
