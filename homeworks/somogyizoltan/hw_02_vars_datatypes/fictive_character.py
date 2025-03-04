@@ -89,5 +89,5 @@ if is_extra:
 else:
     final_text = f"My character is {age_in_days} days old. His/her name is {user_name} and he/she has {python_exp_in_years} years experience."
 
-
+# Kiírni a végeredményt
 print(final_text)
