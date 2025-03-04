@@ -5,7 +5,7 @@ fictive_character = ()
 fictive_character_name = input("Please give a name to the character: ")
 fictive_character_age = input("Please give an age to the character: ")
 fictive_character_pk = input("Please give a python knowledge in years to the character: ")
-print("Name: " + fictive_character_name + ", "+ "Age: " + fictive_character_age + ", " + "Python knowledge: " + fictive_character_pk)
+pprint(f"My character is {fictive_character_age} old. His/her name is {fictive_character_name.upper().strip()} and he/she has {fictive_character_pk} years experience. ")
 print("------------------------------")
 
 #Kiemelem az életkort, amit megszorzok 365, és hozzáadom a szökpéveket, mivel az osztás miatt float-ba rakja a szökőévet átalakítom int-be
