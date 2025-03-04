@@ -66,7 +66,8 @@ pprint((user_info["phone_contacts"]))
 print("------------------------------------------")
 
 #Hozzáadom az új embert a két telefonszámmal a kontaktokhoz
-user_info["phone_contacts"]["Scarlet"] = ("+363045624235", "+36302432332113")
+
+user_info["phone_contacts"]["Scarlet"] = ["+363045624235", "+36302432332113"]
 pprint((user_info["phone_contacts"]))
 print("------------------------------------------")
 
