@@ -46,11 +46,19 @@ print(user_info["favourite_meals"])
 print("--------------------------------------------------------------------------------")
 
 # 7
+user_info["favourite_meals"][0], user_info["favourite_meals"][-1] = user_info["favourite_meals"][-1], user_info["favourite_meals"][0]
+print(user_info["favourite_meals"])
+print("--------------------------------------------------------------------------------")
+"""
+---
+Old
+---
 user_info_last_fav_meal = user_info["favourite_meals"][-1]
 user_info["favourite_meals"][-1] = user_info["favourite_meals"][0]
 user_info["favourite_meals"][0] = user_info_last_fav_meal
 print(user_info["favourite_meals"])
 print("--------------------------------------------------------------------------------")
+"""
 
 # 8
 user_info["phone_contacts"]["Joe"] = "+36305555555"
