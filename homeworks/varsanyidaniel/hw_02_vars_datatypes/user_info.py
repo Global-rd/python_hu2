@@ -23,7 +23,7 @@ user_info["skills"] = x
 #2
 user_info["favourite_meals"].sort()
 #3
-print(user_info["favourite_meals"][-2])
+print("A favourite_meals lista utolsó előtti eleme:",user_info["favourite_meals"][-2])
 #4
 user_info["favourite_meals"].append("spaghetti")
 #5
@@ -39,7 +39,11 @@ del(user_info["phone_contacts"]["Tim"])
 #10
 user_info["phone_contacts"]["Andrew"] = ["+369992221" , "+368883331"]
 
+print("Az eddigi dictionary:")
+pprint(user_info)
+
 #e1
+print("- - - - - - - - - - - - - - - - -")
 print("Extrák:")
 reverse_skills = user_info["skills"][-1:-4:-1]
 print(reverse_skills)
@@ -47,6 +51,7 @@ print(reverse_skills)
 #e2
 user_info["phone_contacts"]["Tim"] = user_info["phone_contacts"]["Tim2"]
 del user_info["phone_contacts"]["Tim2"]
+print(user_info["phone_contacts"])
 
 print("- - - - - - - - - - - - - - - - -")
 pprint(user_info)
