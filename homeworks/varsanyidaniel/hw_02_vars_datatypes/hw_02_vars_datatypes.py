@@ -16,9 +16,9 @@ if question == "yes" or question == "no":
     napkor=kor*365.25//1
 
     if bquestion == True:
-        print(f"{név} is {kor} years, or {napkor} days old. He has {tap} years of python experience and he wishes to be a python developer.")
+        print(f"{név} is {kor} years, or {napkor} days old. He/She has {tap} years of python experience and he wishes to be a python developer.")
     if bquestion == False:
-        print(f"{név} is {kor} years, or {napkor} days old. He has {tap} years of python experience, but does not wish to be a python developer.")
+        print(f"{név} is {kor} years, or {napkor} days old. He/She has {tap} years of python experience, but does not wish to be a python developer.")
 
 
 else:
