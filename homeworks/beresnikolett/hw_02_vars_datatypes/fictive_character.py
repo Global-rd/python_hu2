@@ -1,5 +1,5 @@
 character_info = { 
-      "name": str(input("Name: ").capitalize().strip()),
+      "name": input("Name: ").capitalize().strip(),
       "age": int(input("Age: ")),
       "python_experience": int(input("Specify your years of experience with Python: ")),
     }

@@ -17,7 +17,7 @@ user_info["skills"] = user_skills
 user_info["favourite_meals"].sort()
 print(user_info["favourite_meals"][-2])
 user_info["favourite_meals"].append("spaghetti")
-user_info["favourite_meals"].extend(user_info["favourite_meals"][2:])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 user_info["favourite_meals"] = list(set(user_info["favourite_meals"]))
 user_info["favourite_meals"][0], user_info["favourite_meals"][-1] = user_info["favourite_meals"][-1], user_info["favourite_meals"][0]
 user_info["phone_contacts"]["Mia"] = ["+36301357246"]
