@@ -25,14 +25,14 @@ print(user_info["favourite_meals"] [-2])
 user_info["favourite_meals"].append("spaghetti")
 
 #5
-user_info["favourite_meals"].extend(user_info["favourite_meals"][2:3])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 
 #6
 user_info["favourite_meals"]=list(set(user_info["favourite_meals"]))
 #print(type(user_info["favourite_meals"]))
 
 # 7 ez nem a legelagánsabb....hogyan lehetne egyszerűbben??
-user_info["favourite_meals"][0], user_info["favourite_meals"][3]=user_info["favourite_meals"][3], user_info["favourite_meals"][0]
+user_info["favourite_meals"][0], user_info["favourite_meals"][-1]=user_info["favourite_meals"][-1], user_info["favourite_meals"][0]
 
 #8
 user_info["phone_contacts"].update({"Zexter": "06504005000",})
@@ -50,11 +50,7 @@ print("---------------------------------------------")
 print("for extra points")
 print("---------------------------------------------")
 
-user_info["skills"].reverse()
-print(user_info["skills"][:3])
-user_info["skills"].reverse()  #lista eredetibe visszaalakítása
-
-#print(user_info["skills"])
+print(user_info["skills"][-1:-4:-1])
 
 user_info["phone_contacts"]["Tim"]=user_info["phone_contacts"].pop("Tim2")
 
