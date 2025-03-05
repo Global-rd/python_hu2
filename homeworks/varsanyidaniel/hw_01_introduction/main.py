@@ -4,7 +4,7 @@ comment
 as you can see
 """
 
-print("almafás almafák")          #STRING
+print("almafás almafák almafája")          #STRING
 print(1234442426523632)           #INTEGER
 print(4314.412521599999)          #FLOATING POINT NUMBER
 print(True)                       #BOOLEAN
