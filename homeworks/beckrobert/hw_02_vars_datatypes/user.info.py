@@ -26,10 +26,11 @@ print(user_info["favourite_meals"][-2])
 
 user_info["favourite_meals"].append("spaghetti")
 
-user_info["favourite_meals"].extend(user_info["favourite_meals"][1:3])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 
-user_info["favourite_meals"].pop(4)
-user_info["favourite_meals"].pop(4)
+#itt törölni listtel
+user_info["favourite_meals"] = list(set(user_info["favourite_meals"]))
+
 
 user_info["favourite_meals"][0], user_info["favourite_meals"][-1] = user_info["favourite_meals"][-1], user_info["favourite_meals"][0]
 
