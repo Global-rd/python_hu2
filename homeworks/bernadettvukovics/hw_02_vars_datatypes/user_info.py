@@ -32,8 +32,7 @@ user_info["favourite_meals"].append("spaghetti")
 print(f"New meal added: {user_info['favourite_meals']}")
 
 # . Add the third and fourth items of the list to favourite_meals again
-user_info["favourite_meals"].append(user_info["favourite_meals"][2])
-user_info["favourite_meals"].append(user_info["favourite_meals"][3])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 print(f"Duplicated meals added: {user_info['favourite_meals']}")
 
 #  Delete duplicates!
