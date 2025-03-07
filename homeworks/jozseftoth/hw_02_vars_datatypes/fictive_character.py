@@ -19,6 +19,5 @@ else:
     print("HEY!!!! Your answer is not valid! I will decide for you! You are a Python developer! :-)")
     pro_python_developer = None 
 
-
-print(f"Hey {name}! You are {age_in_days} days or {int(age)} years old.\nI know your name ;-) , and you have {python_exp_in_years} years experience.\nAnd cool, you want to be a Python developer! \nWELCOME ON BOARD!") if pro_python_developer else print(f"Hey {name}!\nYou are {age_in_days} days or {int(age)} years old. \nYou have {python_exp_in_years} years Python experience. \nSo, I know you don't want to be a Python developer! \nGood bye and never come back!")
-
+print(f"Hey {name}! You are {age_in_days} days or {int(age)} years old.")
+print(f"I know your name ;-) , and you have {python_exp_in_years} years experience.\nAnd cool, you want to be a Python developer! \nWELCOME ON BOARD!") if pro_python_developer else print(f"You have {python_exp_in_years} years Python experience. \nSo, I know you don't want to be a Python developer! \nGood bye and never come back!")
