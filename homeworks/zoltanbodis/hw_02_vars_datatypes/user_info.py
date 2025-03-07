@@ -49,10 +49,12 @@ print(f"Favourite meals: {", ".join(user_info["favourite_meals"])}")
 5. Add hozzá a favourite_meals-hez az aktuális favourit_meals lista
 harmadik és negyedik elemét (nem az index-ét) újra.
 """
-user_info["favourite_meals"].extend([user_info["favourite_meals"][2], user_info["favourite_meals"][3]])
+#user_info["favourite_meals"].extend(user_info["favourite_meals"][2], user_info["favourite_meals"][3])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 
 print("\n5. Add hozzá a favourite_meals-hez az aktuális favourit_meals lista harmadik és negyedik elemét (nem az index-ét) újra. \n------------------------------------------")
 print(f"Favourite meals: {", ".join(user_info["favourite_meals"])}")
+
 
 """
 6. Ezután töröld az így keletkezett duplikátumokat!
