@@ -15,17 +15,16 @@ user_info = {
 }
 skills_string=input("Give me 4 program languages that you can use separated by commas, without spaces: ").strip()
 #C#,JavaScript,C++,Java
-Mike_skills=skills_string.split(",")
+mike_skills=skills_string.split(",")
 print(Mike_skills)
-user_info["skills"]=Mike_skills
+user_info["skills"]=mike_skills
 print(user_info)
 user_info["favourite_meals"].sort()
 print(user_info["favourite_meals"])
 print(user_info["favourite_meals"][-2])
 user_info["favourite_meals"].append("spaghetti")
 print(user_info["favourite_meals"])
-user_info["favourite_meals"].append("sushi")
-user_info["favourite_meals"].append("spaghetti")
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 print(user_info["favourite_meals"])
 user_info["favourite_meals"] = list(set(user_info["favourite_meals"]))
 user_info["favourite_meals"].sort()
@@ -36,7 +35,7 @@ user_info["phone_contacts"]["Katie"] = "+36301234567"
 print(user_info["phone_contacts"])
 user_info["phone_contacts"]["Tim2"]=" "
 
-user_info["phone_contacts"]["Bela"]= "+36201234567", "+36301236547"
+user_info["phone_contacts"]["Bela"]= ["+36201234567", "+36301236547"]
 print(user_info["phone_contacts"])
 
 
