@@ -15,9 +15,12 @@ user_info = {
 }
 #1:
 languages = input("Adj meg 4 programozasi nyelvet, vesszovel elvalasztva: ")
+user_info["skills"] = []
 user_info["skills"] = languages.split(",")
+#print(user_info)
 #2:
 user_info["favourite_meals"].sort()
+#print(user_info)
 #3:
 print(user_info["favourite_meals"][-2])
 #4:
@@ -34,7 +37,9 @@ user_info["phone_contacts"]["Morris"] = "+36123456789"
 del user_info["phone_contacts"]["Tim"]
 #10:
 user_info["phone_contacts"]["Lilus"] = ["+37123456789", "+38123456789"]
+print(user_info)
 #szorgalmi_1:
 print(user_info["skills"][-3:][::-1])
 #szorgalmi_2:
 user_info["phone_contacts"]["Tim"] = user_info["phone_contacts"].pop("Tim2")
+print(user_info)
