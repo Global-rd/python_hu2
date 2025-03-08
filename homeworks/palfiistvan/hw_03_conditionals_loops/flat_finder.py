@@ -6,9 +6,6 @@
 place = input("Please enter the place: ")
 rent  = int(input("Please enter the rent [USD]: "))
 
-print(rent < 4000)
-print(place == "New York" or place == "San Fransisco") 
-
 if place == "Chicago":
     print(f"Sarah will rent the apartment in {place} for {rent}")
 
