@@ -35,7 +35,7 @@ user_info["favourite_meals"].append("spaghetti")
 print(f"4. {user_info["favourite_meals"]}")
 
 # 5.
-user_info["favourite_meals"].extend(user_info["favourite_meals"][2:])
+user_info["favourite_meals"].extend(user_info["favourite_meals"][2:4])
 print(f"5. {user_info["favourite_meals"]}")
 
 # 6.
