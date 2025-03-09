@@ -14,11 +14,11 @@ Tárold a nyertesek pontjait, és minden kör végén növeld az aktuális ját�
 
 #Define the number of rounds
 def get_valid_rounds():
-    rounds = int(input("Please enter the number of rounds you want to play: "))
-    while rounds % 2 == 0:
+    num_rounds = int(input("Please enter the number of rounds you want to play: "))
+    while num_rounds % 2 == 0:
         print("Please enter an odd number of rounds so there can be a clear winner!")
-        rounds = int(input("Please enter the number of rounds you want to play: "))
-    return rounds
+        num_rounds = int(input("Please enter the number of rounds you want to play: "))
+    return num_rounds
 
 #Define options
 def get_valid_choice(player):
@@ -48,10 +48,10 @@ def play_round():
             return 2
 
 #The game
-rounds = get_valid_rounds()
+num_rounds = get_valid_rounds()
 player1_score = 0
 player2_score = 0
-for current_round in range(1, rounds + 1):
+for current_round in range(1, num_rounds + 1):
     print(f"\n{current_round}. round:")
     winner = play_round()
     if winner == 1:
