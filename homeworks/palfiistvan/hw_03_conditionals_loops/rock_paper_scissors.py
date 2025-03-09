@@ -31,7 +31,7 @@ while count < rounds + 1:
 
     if (answer1 == "paper" and answer2 == "rock") or (answer1 == "scissors" and answer2 == "paper") or (answer1 == "rock" and answer2 == "scissors"):
         player1_score += 1
-    elif (answer2 == "paper" and answer1 == "rock") or (answer2 == "scissors" and answer1 == "paper") or (answer2 == "rock" and answer1 == "scissors"):
+    else:
         player2_score += 1
 
     count += 1
