@@ -12,7 +12,7 @@ if place == "Chicago":
 elif rent < 3000 and place != "Washington":
     print(f"Sarah will rent the apartment in {place} for {rent}")
 
-elif (rent < 4000) and (place == "New York" or place == "San Fransisco"):
+elif (rent < 4000) and (place in ["New York", "San Francisco"]):
     print(f"Sarah will rent the apartment in {place} for {rent}")
 
 else:
