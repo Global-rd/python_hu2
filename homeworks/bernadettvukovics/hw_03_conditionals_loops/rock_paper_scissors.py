@@ -47,4 +47,3 @@ if player1_score > player2_score:
     print(f"Player 1 wins with {player1_score} points!")
 else:
     print(f"Player 2 wins with {player2_score} points!")
-    
