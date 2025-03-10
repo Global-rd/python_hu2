@@ -32,6 +32,7 @@ for round_num in range(1, rounds + 1):
     #  the winner of the round
     if p1_move == p2_move:
         print("It's a tie!")
+        continue  
     elif (p1_move == "rock" and p2_move == "scissors") or \
          (p1_move == "scissors" and p2_move == "paper") or \
          (p1_move == "paper" and p2_move == "rock"):
@@ -40,10 +41,14 @@ for round_num in range(1, rounds + 1):
     else:
         print("Player 2 wins this round!")
         player2_score += 1
+    break    
 
 # Game over, print final results
 print("\n--- Game Over ---")
-if player1_score > player2_score:
+
+if player1_score == 0 and player2_score == 0:
+    print("It's a draw! No one won.")
+elif player1_score > player2_score:
     print(f"Player 1 wins with {player1_score} points!")
 else:
     print(f"Player 2 wins with {player2_score} points!")
