@@ -14,28 +14,28 @@ else:
     second_scores = 0
 
     # szabályok meghatározása előre
-#----------- Ezt a chatgpt-től kérdeztem, hogyan lehetne előre meghatározni a szabályt, légyszi le tudnád írni röviden ezt a szakaszt? nem teljesen világos... ha lesz erről szó, tárgytalan, köszi!-----
-    def game_result(choice1, choice2):
+
+def game_result(choice1, choice2):
     
-        rules = {
+    rules = {
         "rock": "scissors",   # kő legyőzi az ollót
         "scissors": "paper",  # olló legyőzi a papírt
         "paper": "rock"       # papír legyőzi a követ
         }
         
-        if choice1 == choice2:
+    if choice1 == choice2:
             return "It's a tie!"
-        #----- A tömb az világos amit létrehoztam az előbb, azt már tanultuk, illetve a "döntetlen" eredmény, de ezt nem értem--------------
-        elif rules[choice1] == choice2:
-        #-----------------------------------------------------------------------------------------------------------------------------------
+       
+    elif rules[choice1] == choice2:
+       
             return f"{first_player} wins! {choice1} beats {choice2}"
-        else:
+    else:
             return f"{second_player} wins! {choice2} beats {choice1}"
 
     # kör kiírása és hozzáadása
-    round_num = 0  # a körök száma itt kezelve lesz
+round_num = 0  # a körök száma itt kezelve lesz
 
-    while round_num < rounds:  # amíg el nem érjük a kívánt köröket
+while round_num < rounds:  # amíg el nem érjük a kívánt köröket
         print(f"Round {round_num + 1}")
 
 
@@ -65,14 +65,8 @@ else:
             round_num += 1
 
     # végső pontszám kiírása
-    print(f"\nFinal Scores: {first_player}: {first_scores}, {second_player}: {second_scores}")
-    if first_scores > second_scores:
+print(f"\nFinal Scores: {first_player}: {first_scores}, {second_player}: {second_scores}")
+if first_scores > second_scores:
         print(f"{first_player} wins the game with!")
-    else:
+else:
         print(f"{second_player} wins the game!")
-
-"""
-Hogyan tudnám megoldani, hogy egy hibás bekérés után azonnal újra kérje?
-Már nem nagyon mertem sajnos kísérletezgetni, mert örülök hogy működik és már így is össze zavart, 
-csak a teljes bekérési session után tudtam elérni ezt a hiba kiírását.
-"""
