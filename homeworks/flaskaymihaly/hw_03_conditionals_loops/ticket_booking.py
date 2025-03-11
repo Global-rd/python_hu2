@@ -20,11 +20,6 @@ available_seats = [
     [0, 0, 0, 0, 0],
 ]
 
-for id, row in enumerate(available_seats, 1):
-    print(id, row)
-    for id, seat_number in enumerate(row):
-        pass
-
 #------------------------------------------------------------------------------
 while True:
     ticket_amount=int(input("How many tickets would you like to reserve?"))
