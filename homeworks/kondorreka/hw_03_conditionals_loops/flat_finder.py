@@ -38,7 +38,7 @@ elif "chicago" in city:
 
 #Nagyon szereti New York-ot és San Francisco-t, bármelyik városban kivenne egy lakást, 
 #ha az albérlet ára kevesebb mint 4000 USD havonta.
-elif ("new york" in city or "san francisco" in city) and price < 4000: 
+elif city in {"new york", "san francisco"} and price < 4000:
     if "new york" in city:
         city = "new york"
     elif "san francisco" in city:
