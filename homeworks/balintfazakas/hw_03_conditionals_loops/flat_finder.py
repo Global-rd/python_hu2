@@ -14,11 +14,9 @@ PCM = int(input("Please enter your budget for the rent: "))
 if city == "Chicago":
     print(f"Money doesn't matter, let's move to Chicago!")
 
-elif city == "New York" or city == "San Fransisco":
-    if PCM < 4000:
+elif city in["New York", "San Fransisco"] and PCM < 4000:
         print(f"Your {PCM} USD budget is enough, you can move to {city}!")
-    else: print(f"{PCM} USD budget is not enough to move to {city}!")
-
+    
 elif city == "Washington":
     print("There is no money in the world that would make you move to Washington!")
 

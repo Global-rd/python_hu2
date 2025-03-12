@@ -20,7 +20,7 @@ def get_valid_rounds():
         num_rounds = int(input("Please enter the number of rounds you want to play: "))
     return num_rounds
 
-#Define options
+#Define options, accept only rock, paper, scissors as valid inputs
 def get_valid_choice(player):
     valid_choices = ["rock", "paper", "scissors"]
     while True:
@@ -32,7 +32,9 @@ def get_valid_choice(player):
             print(
                 "Error: Invalid choice. Please choose from 'rock', 'paper' or 'scissors'.")
 
-#Rules of the game
+"""Rules of the game
+If draw, play again, otherwise:
+Rock beats scissors, scissors beats paper, paper beats rock"""
 def play_round():
     while True:
         choice1 = get_valid_choice(1)
@@ -47,7 +49,7 @@ def play_round():
         else:
             return 2
 
-#The game
+#The game, play the rounds
 num_rounds = get_valid_rounds()
 player1_score = 0
 player2_score = 0
