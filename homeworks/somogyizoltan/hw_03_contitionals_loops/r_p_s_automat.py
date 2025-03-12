@@ -22,8 +22,6 @@ input_list = ["rock", "paper", "scissors"]
 player_01_points = 0
 player_02_points = 0
 
-player_01_choise = ""
-player_02_choise = ""
 
 # Bekérni a maximum tippelési számot
 
