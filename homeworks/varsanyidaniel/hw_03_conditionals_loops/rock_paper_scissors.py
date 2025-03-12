@@ -24,15 +24,17 @@ while rounds%2 == 0:
 
 for i in range(rounds):
 
-    first_player=input("Első játékos, add meg, hogy mit lépsz: ")
-    while first_player is not "rock" or first_player is not "paper" or first_player is not "scissors":
-        first_player=input("Első játékos, add meg, hogy mit lépsz: ")
+    while True:
+        first_player_input("Első játékos, add meg, hogy mit lépsz: ")
+        if first_player_input in ("rock","paper","scissors"):
+                break
+    
+    while True:
+        second_player_input("Második játékos, add meg, hogy mit lépsz: ")
+        if second_player_input in ("rock","paper","scissors"):
+            break
 
-    second_player=input("Második játékos, add meg, hogy mit lépsz: ")
-    while second_player is not "rock" or second_player is not "paper" or second_player is not "scissors":
-        second_player=input("Második játékos, add meg, hogy mit lépsz: ")
-
-    vs(first_player,second_player,first_player_score,second_player_score)
+vs(first_player,second_player,first_player_score,second_player_score)
 
 if first_player_score > second_player_score:
     print("Az Első Játékos nyerte ezt a meccset!")
