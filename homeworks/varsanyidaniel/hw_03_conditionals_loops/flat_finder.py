@@ -12,7 +12,7 @@ elif (new_home_location == "New York") or (new_home_location == "San Francisco")
     else:
         print(f"Sajnos Sarah nem költözne be a {new_home_location} -i lakásba {new_home_price} USD havi bérért.")
 
-elif new_home_price < 3000:
+elif new_home_price <= 3000:
     print(f"Sarah beköltözne a {new_home_location} -i lakásba {new_home_price} USD havi áron.")
 
 else:
