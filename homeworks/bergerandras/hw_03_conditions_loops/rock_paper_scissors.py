@@ -14,7 +14,7 @@ while current_round < rounds:
     if player_1.lower() in valid_inputs and player_2.lower() in valid_inputs:
         if player_1.lower() == player_2.lower():
             print("Tie!")
-            current_round+=1
+            continue
         elif rps_rules[player_1] == player_2:
             print("Player 1 wins!")
             current_round+=1
