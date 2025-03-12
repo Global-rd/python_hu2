@@ -1,21 +1,3 @@
-def vs (f,s,player_1_score,player_2_score):
-    if f == "rock" and s == "scissors":
-        print("Ezt a kört az Első Játékos nyerte!")
-        return player_1_score + 1
-    elif f == "scissors" and s == "paper":
-        print("Ezt a kört az Első Játékos nyerte!")
-        return player_1_score + 1
-    elif f == "paper" and s == "rock":
-        print("Ezt a kört az Első Játékos nyerte!")
-        return player_1_score + 1
-    elif f == s:
-        print("Ez a kört döntetlen volt!")
-    else:
-        print("Ezt a kört a Második Játékos nyerte!")
-        return player_2_score + 1
-
-
-
 rounds = int(input("Add meg, hogy hány kört szeretnétek játszani: "))
 first_player_score = 0
 second_player_score = 0
@@ -25,20 +7,28 @@ while rounds%2 == 0:
 for i in range(rounds):
 
     while True:
-        first_player_input("Első játékos, add meg, hogy mit lépsz: ")
+        first_player_input=input("Első játékos, add meg, hogy mit lépsz: ")
         if first_player_input in ("rock","paper","scissors"):
                 break
     
     while True:
-        second_player_input("Második játékos, add meg, hogy mit lépsz: ")
+        second_player_input=input("Második játékos, add meg, hogy mit lépsz: ")
         if second_player_input in ("rock","paper","scissors"):
             break
 
-vs(first_player,second_player,first_player_score,second_player_score)
+    if first_player_input == second_player_input:
+        print(f"\n Ez a kör döntetlen volt!\n")
+    elif (first_player_input == "rock" and second_player_input == "scissors") or (first_player_input == "paper" and second_player_input == "rock") or (first_player_input == "scissors" and second_player_input == "paper"):
+        first_player_score += 1
+        print(f"\n Ezt a kört az Első Játékos nyerte! Most {first_player_score} pontja van!\n")
+    else:
+        second_player_score += 1
+        print(f"\n Ezt a kört a Második Játékos nyerte! Most {second_player_score} pontja van!\n")
+    
 
 if first_player_score > second_player_score:
-    print("Az Első Játékos nyerte ezt a meccset!")
+    print(f"\n Az Első Játékos nyerte ezt a meccset! \n Az Első Játékosnak {first_player_score} pontja volt, míg a Második Játékosnak {second_player_score} pontja volt. \n")
 elif first_player_score < second_player_score:
-    print("A Második Játékost nyerte ezt a meccset!")
+    print(f"\n A Második Játékost nyerte ezt a meccset! \n Az Első Játékosnak {first_player_score} pontja volt, míg a Második Játékosnak {second_player_score} pontja volt. \n")
 else:
-    print("A meccs döntetlen volt!")
+    print(f"\n A meccs döntetlen volt! \n Az Első Játékosnak {first_player_score} pontja volt, míg a Második Játékosnak is {second_player_score} pontja volt. \n")
