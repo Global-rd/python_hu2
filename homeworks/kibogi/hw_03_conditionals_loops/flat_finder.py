@@ -1,8 +1,9 @@
 city = input ("Add meg a város nevét")
-cost_usd = input ("Add meg a bérleti díjat")
-cost = int(cost_usd)
+cost = int(input ("Add meg a bérleti díjat"))
 
-if city == "New York" or city == "San Francisco":
+#if city == "New York" or city == "San Francisco": ezt elegánsabban írva:
+
+if city in ["New York", "San Francisco"]:
     if cost < 4000:
         print (f"A lakás {city}-ban található és az ára csak {cost} USD, ezért Sarah ide tudna költözni.")
     else:

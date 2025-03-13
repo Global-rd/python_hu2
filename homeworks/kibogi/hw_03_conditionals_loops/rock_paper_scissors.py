@@ -18,19 +18,25 @@ round_count = 0
 
 while round_count < rounds:
 
-    choice_player_1 = input ("Játékos 1, mi a választásod?")
+    while True:
+        choice_player_1 = input ("Játékos 1, mi a választásod?")
+        if choice_player_1 in choices:
+            break
 
-    if choice_player_1 not in choices:
-        print (f"Hiba, a választásod {choice_player_1}, ami nem elfogadott. Választásod csak rock, paper, scissors lehet.")
+        else:
+            print (f"Hiba, a választásod {choice_player_1}, ami nem elfogadott. Választásod csak rock, paper, scissors lehet.")
 
-    choice_player_2 = input ("Játékos 2, mi a választásod?")
+    while True:
+        choice_player_2 = input ("Játékos 2, mi a választásod?")
+        if choice_player_2 in choices:
+            break
 
-    if choice_player_2 not in choices:
-        print (f"Hiba, a választásod {choice_player_2}, ami nem elfogadott. Választásod csak rock, paper, scissors lehet.")
+        else:
+            print (f"Hiba, a választásod {choice_player_2}, ami nem elfogadott. Választásod csak rock, paper, scissors lehet.")
 
     if choice_player_1 == choice_player_2:
-        round_count +=1
-        print(f"Döntetlen! Körök száma {round_count}")
+        print("Döntetlen! Játszatok újra")
+        continue
 
     elif (choice_player_1 == "rock" and choice_player_2 == "scissors") or (choice_player_1 == "paper" and choice_player_2 == "rock") or (choice_player_1 == "scissors" and choice_player_2 == "paper"):
         point_player_1 +=1 
@@ -41,11 +47,7 @@ while round_count < rounds:
         round_count +=1
         print(f"A második játékos nyert! Pontja: {point_player_2}. Körök száma {round_count}")
     
-
-if point_player_1 == point_player_2:
-    print("A játéknak vége, az eredmény dDöntetlen!")
-
-elif (point_player_1 > point_player_2) :
+if (point_player_1 > point_player_2) :
     print(f"A játéknak vége, Játékos 1 nyert {point_player_1} az {point_player_2}-hez.!")
 
 else: 
