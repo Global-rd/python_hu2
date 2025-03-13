@@ -7,7 +7,7 @@ if us_flat_city == "chicago":
 elif us_flat_city == "washington":
     print(f"you cannot rent the flat in {us_flat_city} for a price {us_flat_price}USD, because you hate the city")
 
-elif us_flat_city == ("new york" or "san francisco") and us_flat_price <=4000:
+elif us_flat_city in ("new york","san francisco") and us_flat_price <=4000:
     print(f"you can rent the flat in {us_flat_city} for a price {us_flat_price}USD")
 
 elif us_flat_price <=3000:
