@@ -20,4 +20,4 @@ print(f"My character is {age_in_days} days old. His/her name is {first_name} {la
 
 goal = "wants" if input("Do you want to be a pro python programmer? ").strip() == "yes" else "does not want"
 
-print(f"My character is {age_in_days} days old. His/her name is {first_name} {last_name} and he/she has {experience} years of python experience. He/She {goal} to be a python programmer")
+print(f"My character is {age_in_days} days old. His/her name is {first_name} {last_name} and he/she has {experience} years of python experience. He/She {goal} to be a python programmer.")
