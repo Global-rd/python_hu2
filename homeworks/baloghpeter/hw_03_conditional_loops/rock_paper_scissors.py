@@ -1,13 +1,18 @@
 import random
 
-user_name = input("Enter your name: ")
+user_name = input("Enter your name: ").title()
+while True:
+    user_rounds = int(input("How many rounds do you want to play? (Must be an odd number): "))
+    if user_rounds % 2 == 1:
+        break
+    print("Please enter an odd number to ensure a winner.")
 
 user_score = 0
 computer_score = 0
 rounds_played = 0
 
 
-while rounds_played < 5:
+while rounds_played < user_rounds:
     print(f"\nRound {rounds_played + 1}:")
 
     user_choice = input("Choose (rock, paper, or scissors): ").lower()
