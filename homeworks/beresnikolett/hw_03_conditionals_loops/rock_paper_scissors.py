@@ -31,9 +31,7 @@ while rounds < number_of_rounds:
             player_1_score += 0
             player_2_score += 0
             break
-        elif (player_1_choice == "rock" and player_2_choice == "scissors") or 
-              (player_1_choice == "paper" and player_2_choice == "rock") or 
-              (player_1_choice == "scissors" and player_2_choice == "paper"):
+        elif ((player_1_choice == "rock" and player_2_choice == "scissors") or (player_1_choice == "paper" and player_2_choice == "rock") or (player_1_choice == "scissors" and player_2_choice == "paper")):
             winner = (f"{players[0]} wins!")
             player_1_score += 1
         else:
@@ -42,6 +40,7 @@ while rounds < number_of_rounds:
         rounds += 1
         print(f"Round {rounds}: {winner} {players[0]}: {player_1_score}, {players[1]}: {player_2_score}.")
         time.sleep(1)
+        break
 if player_1_score > player_2_score:
     print("Player 1 wins!")
 else:
