@@ -35,9 +35,9 @@ while True:
         rent_price = int(input("What is the rent price? "))
         print(f"Yay! You can move in your dream city, {city} for {rent_price:.2f} $ rent/month.")
         break
-    elif city == ["New York", "San Fransisco"]:
+    elif city in ["New York", "San Fransisco"]:
         rent_price = int(input("What is the rent price? "))
-        if rent_price < 4000:
+        if rent_price <4000:
             print(f"Great choice! {city} is a wonderful city to live in for {rent_price:.2f} $ rent/month.")
             break
         else:
