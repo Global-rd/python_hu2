@@ -21,7 +21,9 @@ player2_score = 0
 
 for round_num in range(1, rounds + 1):
     print(f"\n{round_num}. kör:")
-    
+
+while True:  
+
     while True:
         choice1 = input("Első játékos választ (rock, paper, scissors): ").lower()
         if choice1 in choices:
@@ -38,6 +40,7 @@ for round_num in range(1, rounds + 1):
     
     if choice1 == choice2:
         print("Döntetlen!")
+        continue
     elif (choice1 == "rock" and choice2 == "scissors") or \
          (choice1 == "scissors" and choice2 == "paper") or \
          (choice1 == "paper" and choice2 == "rock"):
@@ -46,6 +49,7 @@ for round_num in range(1, rounds + 1):
     else:
         print("Második játékos nyerte a kört!")
         player2_score += 1
+    break
 
 print("\nJáték vége!")
 if player1_score > player2_score:
