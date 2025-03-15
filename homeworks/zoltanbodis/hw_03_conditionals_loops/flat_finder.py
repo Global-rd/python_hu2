@@ -31,7 +31,7 @@ if city_l == "chicago":
     moving = True
 elif city_l == "washington":
     moving = False
-elif (city_l == "new york" or city_l == "san francisco") and price < 4000:
+elif city_l in ("new york", "san francisco") and price < 4000:
     moving = True
 elif price <= 3000:
     moving = True    
