@@ -14,43 +14,43 @@
 # Rule 4: price <= 3000
 
 city = (
-    input("Enter the city's name").strip().title()
+    input("Enter the city's name: ").strip().title()
 )  # no lead/tail space, every letter with Capital
 rent = int(
     input("Enter the expected monthly rent in USD: ").strip()
 )  # convert input to integer
 
-# Sarah's preference in code - Solution option #1
-if city == "Chicago":
-    decision = "She will definitely move in, price doesn't matter blingbling"
-elif city in ["New York", "San Farnsisco"] and rent < 4000:
-    decision = (
-        f"She will move to {city} because the rent is affordable ({rent} $ / month)"
-    )
-elif city == "Washington":
-    decision = "She will never move to Washington"
-elif rent <= 3000:
-    decision = (
-        f"She will move to {city} because the rent is affordable ({rent} $ / month)"
-    )
-else:
-    decision = f"She will Not move to {city} because {rent} $ / month is too high"
+# Sarah's preference in code - Solution option #1 - commented out based on PR feedback
+# if city == "Chicago":
+#     decision = "She will definitely move in, price doesn't matter blingbling"
+# elif city in ["New York", "San Farnsisco"] and rent < 4000:
+#     decision = (
+#         f"She will move to {city} because the rent is affordable ({rent} $ / month)"
+#     )
+# elif city == "Washington":
+#     decision = "She will never move to Washington"
+# elif rent <= 3000:
+#     decision = (
+#         f"She will move to {city} because the rent is affordable ({rent} $ / month)"
+#     )
+# else:
+#     decision = f"She will Not move to {city} because {rent} $ / month is too high"
 
-print(decision)
+# print(decision)
 
 # Sarah's preference in code - Solution option #2
-decision = "No"  # setting decision to a default value,
+decision = False  # setting decision to a default value,
 # so she won't move unless we match one of her options
 
 if city == "Chicago":
-    decision = "Yes"
+    decision = True
 elif city in ["New York", "San Fransisco"] and rent < 4000:
-    decision = "Yes"
+    decision = True
 elif rent <= 3000 and city != "Washington":
-    decision = "Yes"
+    decision = True
 
 print(
-    f"Sarah's decision for {city} (rent {rent} $ / month): {decision}, let's move in!"
-    if decision == "Yes"
-    else f"Sarah's deicion for {city} (rent {rent} $ / month: {decision}, let's skip this one.)"
+    f"Sarah's decision for {city} (rent {rent} $ / month): Yes, let's move in!"
+    if decision
+    else f"Sarah's deicion for {city} (rent {rent} $ / month): No, let's skip this one."
 )
