@@ -12,7 +12,7 @@ if city == "Washington":
 elif city == "Chicago":
         print(f"Sarah annyira imádja {city.capitalize()}-t,hogy bármit megadna azért, hogy ott lakhasson!")
 
-elif city == "new york" or city == "san francisco" and rent < 4000:
+elif city in ["new york", "san francisco"] and rent < 4000:
         print (f"Sarah nagyon szereti ezt a várost, szívesen venne ki lakást {city.capitalize()}-ban")
 else:
         print(f"Sarah nem költözne {city.capitalize()}-ba.")
