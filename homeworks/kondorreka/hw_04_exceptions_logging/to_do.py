@@ -1,13 +1,13 @@
 import os
-from to_do_def import _1add_task #1. Add Task
-from to_do_def import _2read_task #2. View Tasks
-from to_do_def import _3delete_task #3. Remove Task
+from to_do_def import add_task #1. Add Task
+from to_do_def import read_task #2. View Tasks
+from to_do_def import delete_task #3. Remove Task
 from to_do_def import display_menu #kiprinteli a lehetséges opciókat
 import logging
 
 #Mappák létrehozása, ha nem léteznek
-data_dir = "kondorreka/data"
-logs_dir = "kondorreka/logs"
+data_dir = "homeworks/kondorreka/data"
+logs_dir = "homeworks/kondorreka/logs"
 os.makedirs(data_dir, exist_ok=True)
 os.makedirs(logs_dir, exist_ok=True)
 
@@ -63,15 +63,15 @@ while True:
             continue
      
         elif command == 1:
-            _1add_task(file_path)
+            add_task(file_path)
             logger.info("Feladat hozzáadva.")
         elif command == 2:
-            for task in _2read_task(file_path):
+            for task in read_task(file_path):
                 print(task)
             logger.info("Feladatok megtekintve.")
         elif command == 3:
             task = input("Melyik feladat törölhető? ")
-            _3delete_task(file_path, task)
+            delete_task(file_path, task)
             logger.info(f"Feladat törölve: {task}")
         else:
             print("Legyen szép napod!")

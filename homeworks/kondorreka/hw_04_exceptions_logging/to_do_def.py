@@ -3,7 +3,7 @@ print(os.getcwd())
 
 #Definiálj 3 függvényt a következőkre: 
 #egy feladat hozzáadása
-def _1add_task(file_path):
+def add_task(file_path):
     while True:
         task = input("Adj hozzá új feladatot:").strip()
         if task == "":
@@ -20,7 +20,7 @@ def _1add_task(file_path):
                 continue
 #--------------------------------------------------------------------------------
 #feladatok olvasása
-def _2read_task(file_path):
+def read_task(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             for line in file:
@@ -30,7 +30,7 @@ def _2read_task(file_path):
         yield from iter([])
 #--------------------------------------------------------------------------------
 ##egy feladat törlése
-def _3delete_task(file_path, task):
+def delete_task(file_path, task):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             lines = file.readlines()
