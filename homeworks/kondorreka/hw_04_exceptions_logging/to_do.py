@@ -6,8 +6,8 @@ from to_do_def import display_menu #kiprinteli a lehetséges opciókat
 import logging
 
 #Mappák létrehozása, ha nem léteznek
-data_dir = "homeworks/kondorreka/data"
-logs_dir = "homeworks/kondorreka/logs"
+data_dir = "homeworks/kondorreka/hw_04_exceptions_logging/data"
+logs_dir = "homeworks/kondorreka/hw_04_exceptions_logging/logs"
 os.makedirs(data_dir, exist_ok=True)
 os.makedirs(logs_dir, exist_ok=True)
 
