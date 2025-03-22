@@ -51,3 +51,4 @@ coverage.xml
 # Environment variables
 .env
 .streamlit
+homeworks/balintfazakas/hw_04_exception_logging/log.txt
