@@ -25,7 +25,7 @@ from pathlib import Path
 
 # Define file paths
 log_location = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/log.txt")
-filename = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/tasks.txt")
+filename = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/task.log")
 
 # Ensure the log file's directory exists
 log_location.parent.mkdir(parents=True, exist_ok=True)
