@@ -1,5 +1,0 @@
-*.log
-
-# Ignore other temporary files
-*.env
-node_modules/
