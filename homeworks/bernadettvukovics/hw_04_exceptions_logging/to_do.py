@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', hand
     logging.FileHandler("app.log")  # Log to file
 ])
 
-TASK_FILE = "tasks.txt"  # TXT file for storing tasks
+TASK_FILE = os.path.join(os.path.dirname(__file__), "tasks.txt")  # TXT file for storing tasks
 
 
 def display_menu():
