@@ -1,3 +1,6 @@
+
+# plusz printeket azért tettem bele, hogy ellenőrizni tudjam, amiket csináltam
+
 import pprint
 
 # COPY OF TASK DESCRIPTION CODE
@@ -34,7 +37,7 @@ list_of_programming_languages = string_of_programming_languages.split(",")  # st
 print(list_of_programming_languages)
 
 user_info["skills"] = list_of_programming_languages
-
+print(user_info)
 
 # 2. FAVORITE MEALS ELEMEK RENDEZÉSE
 
@@ -44,7 +47,7 @@ print(user_info["favourite_meals"])
 
 # 3. FAVOURITE MEALS LISTA UTOLSÓ ELŐTTI ELEMÉNEK KIPRINTELÉSE
 
-print(user_info["favourite_meals"][-1])
+print(user_info["favourite_meals"][-2])  # már az abc sorrendben rendezés szerinti utolsó előttit printelem
 
 
 # 4. HOZZÁADÁS A LISTÁHOZ
@@ -65,6 +68,7 @@ print(user_info["favourite_meals"])
 # 6. DUPLIKÁTUMOK TÖRLÉSE
 
 user_info["favourite_meals"] = list(set(user_info["favourite_meals"]))
+print(user_info)
 
 
 # 7. ELEMEK SORRENDJÉNEK FELCSERÉLÉSE
@@ -75,6 +79,7 @@ last_element = user_info["favourite_meals"][-1]
 user_info["favourite_meals"][0] = last_element
 user_info["favourite_meals"][-1] = first_element
 
+print(user_info)
 
 # 8. ÚJ ELEM HOZZÁADÁSA (PHONE CONTACT)
 
@@ -84,6 +89,7 @@ user_info["phone_contacts"]["Andras"] = "123456789"
 # 9. ELEM TÖRLÉSE
 
 del user_info["phone_contacts"]["Tim"]
+print(user_info)
 
 
 # 10. ELEM HOZZÁADÁS KÉT ÉRTÉKKEL
@@ -98,3 +104,5 @@ user_info["phone_contacts"]["Lebron"] = "987654321"
 user_info["phone_contacts"]["Lebron2"] = "192837465"
 
     # Így viszont most mindkétszer belekerült, tehát valamelyik megoldást törölni kell
+
+print(user_info)
