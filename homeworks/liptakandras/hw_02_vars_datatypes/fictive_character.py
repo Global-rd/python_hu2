@@ -1,10 +1,10 @@
 
 # INPUT
 
-first_name = input("First name:")
-last_name = input("Last name:")
-age = int(input("Age"))
-python_experience = float(input("Python experience in years:"))
+first_name = input("First name: ")
+last_name = input("Last name: ")
+age = int(input("Age: "))
+python_experience = float(input("Python experience in years: "))
 
 # MODIFIED INPUT
 
