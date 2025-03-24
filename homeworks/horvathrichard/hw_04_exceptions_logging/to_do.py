@@ -2,7 +2,24 @@ import os
 import json  #json fimportálása az adatbáziskezeléshez
 from setup_logger import setup_logger # a logging beállításokat szépen "kilopjuk" az órai anyagból 
 
-logger = setup_logger('to_do')  # 
+logger = setup_logger('to_do')  
+#--------------------------------------------------------------------------------------|
+# fájl elérési út                                                                      |
+file_path = "homeworks/horvathrichard/hw_04_exceptions_logging/todo.json"    #         |
+#                                                                                      |
+# ha a fájl nem létezik, akkor létrehozzuk egy üres listával                           |
+if not os.path.exists(file_path):     #                                                |
+    with open(file_path, "w", encoding="utf-8") as file:     #                         |
+        json.dump([], file, ensure_ascii=False, indent=4)     #                        |
+else:    #                                                                             |--------- Előre létrehozunk egy üres listát, hogy ne fusson hibára az első elem bekérésénél
+    # ha a fájl létezik, próbáljuk meg betölteni a JSON-t                              |
+    try:    #                                                                          |
+        with open(file_path, "r", encoding="utf-8") as file:   #                       |
+            json.load(file)  # ha nem érvényes JSON, újraírjuk üres listával           |
+    except json.JSONDecodeError:      #                                                |
+        with open(file_path, "w", encoding="utf-8") as file:   #                       |
+            json.dump([], file, ensure_ascii=False, indent=4)    #                     |
+#--------------------------------------------------------------------------------------|
 
 #---- a három függvény:
 # feladatok olvasása:
@@ -89,3 +106,10 @@ def display_menu():
 # a program közvetlenül fut:
 if __name__ == "__main__":
     display_menu()
+
+"""
+Elég sokszor használatba vettem a chatgpt segítségét ennél a feladatnál sajnos, mert sok esetben futottam hibára.
+A kódot ránézésre azonnal átlátom hogy mit miért írtam, de nem tudtam az egészet fejből megírni, akárhányszor próbáltam.
+--> Bocs a művészi kommentelgetések miatt, az csak nekem kell hogy jobban átlássam ahogy próbálom memorizálni a struktúráját.
+A fájl mentéssel kapcsolatos probléma még mindig nem világos, hogy ez most csak a json fájl miatt kellett-e, vagy a 'with open' nem ment automatikusan?
+"""
