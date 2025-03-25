@@ -14,25 +14,25 @@ def add(input):
 
 def view():
     with open("empty.txt", 'r') as file:
-        tartalom = file.readlines()
+        content = file.readlines()
         file.close()
-    if tartalom == []:
+    if content == []:
         return print("\nNincs egy elem se!")
-    for number, line in enumerate(tartalom, 0):
+    for number, line in enumerate(content, 0):
         print(f"\n{number}: {line.strip()}")
 
 def remove(input):
     with open("empty.txt", 'r') as file:
-        tartalom = file.readlines()
+        content = file.readlines()
         file.close()
-    if tartalom == []:
+    if content == []:
         return print("\nNincs egy elem se!")
-    for number, line in enumerate(tartalom, 0):
+    for number, line in enumerate(content, 0):
         if int(input) == int(number):
-            tartalom.pop(number)
+            content.pop(number)
         file.close()
     with open("empty.txt", 'w') as file:
-        file.writelines(tartalom)
+        file.writelines(content)
         file.close()
 
 def choices():
