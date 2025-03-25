@@ -100,9 +100,4 @@ user_info["phone_contacts"]["Lebron"] = ["987654321", "192837465"]
 
     # Vagy ha külön key-value párokként, mint ahogy Tim volt
 
-user_info["phone_contacts"]["Lebron"] = "987654321"
-user_info["phone_contacts"]["Lebron2"] = "192837465"
-
-    # Így viszont most mindkétszer belekerült, tehát valamelyik megoldást törölni kell
-
 print(user_info)
