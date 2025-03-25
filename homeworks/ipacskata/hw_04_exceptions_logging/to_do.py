@@ -1,25 +1,34 @@
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', handlers=[
+    logging.StreamHandler(),
+    logging.FileHandler("app.log")
+])
+
 def display_menu():
     menu_options = ["1) Add task", "2) View task", "3) Remove task", "4) Exit"]
     for option in menu_options:
-        print(option)
+           logging.info(option)
 
 def add_task():
     new_task = input("What task would you like to add? ")
     try:
         with open("tasks.txt", "a") as f:
             f.write(new_task + "\n")
-        print("Task added.")
-    except Exception:
-        print("Error adding task.")
+        logging.info("Task added")
+    except:
+        logging.error("Error adding task")    
+    
 
 def view_task():
     try:
         with open("tasks.txt", "r") as f:
             lines = f.readlines()
             for line in lines:
-                print(line.strip())
+                  logging.info(line.strip())
     except Exception:
-        print("Error reading tasks.")
+        logging.error("Error reading tasks")
+
 
 def delete_task():
     task_to_delete = input("What task would you like to remove? ")
@@ -36,9 +45,9 @@ def delete_task():
             for line in kept_lines:
                 f.write(line)
 
-        print("Task removed (if it existed).")
+        logging.info("Task removed")
     except Exception:
-        print("Error removing task.")
+        logging.error("Error removing task")
 
 def task_manager():
     while True:
@@ -52,10 +61,11 @@ def task_manager():
         elif choice == "3":
             delete_task()
         elif choice == "4":
-            print("Bye!")
+            logging.info("Bye!")
             break
         else:
-            print("Invalid number, choose only from 1-4, idiot!")
+            logging.error("Invalid number, choose only from 1-4, idiot!")
+
 
 if __name__ == "__main__":
     task_manager()
