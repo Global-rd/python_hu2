@@ -1,7 +1,8 @@
 import os
 import logging
 
-task_save = "tasks.txt"
+base_dir = os.path.dirname(__file__)
+task_save = os.path.join(base_dir, "tasks.txt")
 
 #log fálj létrehozása
 logging.basicConfig(
