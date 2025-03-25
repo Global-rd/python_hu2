@@ -56,19 +56,11 @@ while rounds < rounds_selected_by_players:  # amint egyenlők, már nincs több 
     if player_1_weapon == player_2_weapon:
         print("Draw. Let's play this round again!") # döntetlen esetén senki nem kap pontot és nem adódik hozzá egy a "rounds"-hoz
         continue  # újra kell kezdeni a kört
-    elif player_1_weapon == "rock" and player_2_weapon == "scissors":
+    elif player_1_weapon == "rock" and player_2_weapon == "scissors" or player_1_weapon == "paper" and player_2_weapon == "rock" or player_1_weapon == "scissors" and player_2_weapon == "paper":
         print(f"Point for player 1")
         player_1_points += 1
         rounds += 1
-    elif player_1_weapon == "paper" and player_2_weapon == "rock":
-        print(f"Point for player 1")
-        player_1_points += 1
-        rounds += 1
-    elif player_1_weapon == "scissors" and player_2_weapon == "paper":
-        print("Point for player 1")
-        player_1_points += 1
-        rounds += 1
-    else:  #
+    else:
         print("Point for player 2")
         player_2_points += 1
         rounds += 1
