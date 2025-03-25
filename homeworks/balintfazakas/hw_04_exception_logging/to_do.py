@@ -24,14 +24,14 @@ import os
 from pathlib import Path
 
 # Define file paths
-log_location = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/log.txt")
+log_location = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/")
 filename = Path("python_hu2/homeworks/balintfazakas/hw_04_exception_logging/task.log")
 
 # Ensure the log file's directory exists
 log_location.parent.mkdir(parents=True, exist_ok=True)
 
 # Ensure log file exists and open with 'w' mode to create/reset it
-with open(log_location, "w") as log_file:
+with open(filename, "w") as log_file:
     pass
 
 # Logging setup
@@ -39,7 +39,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 # Create file handler
-file_handler = logging.FileHandler(log_location)
+file_handler = logging.FileHandler(filename)
 file_handler.setLevel(logging.INFO)
 
 # Create console handler
