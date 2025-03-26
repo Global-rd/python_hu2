@@ -1,13 +1,19 @@
 import logging
 
-file_handler = logging.FileHandler("app.log")
+file_handler = logging.FileHandler("homeworks/varsanyidaniel/hw_04_exceptions_logging/logs.log")
 stream_handler = logging.StreamHandler()
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(message)s')
 
 file_handler.setFormatter(formatter)
+file_handler.setLevel(logging.DEBUG)
 stream_handler.setFormatter(formatter)
-file_handler.setLevel(logging.WARNING)
-stream_handler.setLevel(logging.WARNING)
+stream_handler.setLevel(logging.DEBUG)
+
+logger = logging.getLogger()
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+logger.setLevel(logging.DEBUG)
+
 
 def read():
     with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "r") as file:
@@ -23,18 +29,20 @@ def read():
 def add(addition):
     try:
         with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "a") as file:
+            if addition == "":
+                return logging.warning("\nA feladatlistába nem rakhatsz üres elemeket!\n")
             file.write(f"{addition} \n")
     except Exception as error:
-        logging.error(f"An error has occured: {error}")
+        logging.error(f"\nAn error has occured: {error}\n")
 
 
 def remove(removable):
     with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "r") as file:
         information = file.readlines()
     if information == []:
-        return print("\nA feladatlista üres! \n")
+        return logging.warning("\nA feladatlista üres!\n")
     elif removable < 0 or removable > len(information):
-        return print("Invalid Number! \n")
+        return logging.warning("\nInvalid Number!\n")
     information.pop(removable)
     with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "w") as file:
         file.writelines(information)
@@ -50,7 +58,7 @@ while True:
     try:
         option=int(input("Mondd meg, mit választasz: "))
     except ValueError:
-        print("\n Csakis 1, 2, 3 vagy 4 -est választhatsz! \n")
+        logging.warning("\nCsakis 1, 2, 3 vagy 4 -est választhatsz!\n")
     else:
         if option == 1:
             addition=input("\nÍrd le, hogy milyen teendőt szeretnél hozzáadni a programhoz: ")
@@ -63,8 +71,8 @@ while True:
                 removable=int(input("\nMondd meg, hogy hanyadik feladatot szeretnéd kitörölni: "))-1
                 remove(removable)
             except Exception as error:
-                print(f"An error has occured {error}")
+                logging.error(f"\nAn error has occured {error}\n")
         elif option == 4:
             break
         else:
-            print("\n Csakis 1, 2, 3 vagy 4 -est választhatsz! \n")
+            logging.warning("\n Csakis 1, 2, 3 vagy 4 -est választhatsz!\n")
