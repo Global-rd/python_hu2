@@ -44,8 +44,6 @@ while rounds < rounds_selected_by_players:  # amint egyenlők, már nincs több 
 
    # if player_1_weapon not in ["rock", "paper", "scissors"] or player_2_weapon not in ["rock", "paper", "scissors"]:
     #    print(f"Invalid weapon! You both have to choose rock, paper or scissors!")
-
-      #  continue  # az invalid fegyverválasztás esetén újra kell kezdeni a loopot
     
     # HA MINDKÉT JÁTÉKOS VALID FEGYVERT VÁLASZTOTT
 
@@ -59,11 +57,11 @@ while rounds < rounds_selected_by_players:  # amint egyenlők, már nincs több 
     elif player_1_weapon == "rock" and player_2_weapon == "scissors" or player_1_weapon == "paper" and player_2_weapon == "rock" or player_1_weapon == "scissors" and player_2_weapon == "paper":
         print(f"Point for player 1")
         player_1_points += 1
-        rounds += 1
     else:
         print("Point for player 2")
         player_2_points += 1
-        rounds += 1
+        
+    rounds += 1
     
 #  HA A JÁTÉK VÉGET ÉRT:
     
