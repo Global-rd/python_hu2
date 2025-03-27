@@ -1,5 +1,5 @@
-import os
 import logging
+import json  # adding this for the extra task
 
 # the 4 steps of logging setup:
 
@@ -21,12 +21,12 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 # Define the relative path
-relative_file_path = "homeworks/petroczypeter/hw_04_exceptions_logging/task_list.txt"
+relative_file_path = "homeworks/petroczypeter/hw_04_exceptions_logging/task_list.json"
 
 # Create an empty tasks file using context manager
 try:
     with open(relative_file_path, "w") as file:
-        pass  # Create empty file
+        json.dump([], file)  # initialize with an empty list
     logger.info(
         f"Created empty task file at: {relative_file_path}"
     )  # Log when file is created
@@ -40,8 +40,21 @@ except Exception as e:
 # Add a new task to our file
 def add_task(task):
     try:
-        with open(relative_file_path, "a") as file:
-            file.write(f"{task}\n")
+        tasks = []
+        try:
+            with open(relative_file_path, "r") as file:
+                tasks = json.load(file)  # read the existing tasks from the JSON
+        except (FileNotFoundError, json.JSONDecodeError):
+            # The file doesn't exist or it's empty or it's invalid then we start with an empty list
+            tasks = []
+
+        # Add the new task
+        tasks.append(task)
+
+        # Write the entire list back to the file
+        with open(relative_file_path, "w") as file:
+            json.dump(tasks, file, indent=2)  # indentation for readability
+
         print(f"Following task has been added to our file: {task}")
         logger.info(f"Task added: '{task}'")  # Log task addition
 
@@ -55,7 +68,7 @@ def add_task(task):
 def view_tasks():
     try:
         with open(relative_file_path, "r") as file:
-            tasks = file.readlines()
+            tasks = json.load(file)
 
         if not tasks:
             print("There are no tasks, Hawaii")
@@ -69,17 +82,25 @@ def view_tasks():
             print(f"{i}. {task.strip()}")
         logger.info(f"User viewed {len(tasks)} tasks")  # Log how many tasks were viewed
 
-    except Exception as e:
+    except FileNotFoundError:  # if the file doesn't exist yet
+        error_msg = "Task file not found. No tasks to display."
+        print(error_msg)
+        logger.error(error_msg)
+    except json.JSONDecodeError as e:  # if the file contains invalid JSON
+        error_msg = f"Error parsing JSON data: {e}"
+        print(error_msg)
+        logger.error(error_msg)
+    except Exception as e:  # general exceptions
         error_msg = f"Error reading the tasks list: {e}"
         print(error_msg)
-        logger.error(error_msg)  # Log errors while trying to open
+        logger.error(error_msg)
 
 
 # Remove task from the file if the entered task string matches a task in the list
 def remove_task(task_to_be_removed):
     try:
         with open(relative_file_path, "r") as file:
-            tasks = file.readlines()  # reading all tasks as a list
+            tasks = json.load(file)
 
         if not tasks:  # if our file was empty
             print("No tasks to remove.")
@@ -108,11 +129,20 @@ def remove_task(task_to_be_removed):
 
         # Now we write the updated tasks list back to the file
         with open(relative_file_path, "w") as file:
-            file.writelines(updated_tasks)
+            json.dump(updated_tasks, file, indent=2)
+
         logger.info(
             f"Removed '{task_to_be_removed}' from the list"
         )  # I do have some second thoughts on this... Isn't this too chatty to log down what was actually deleted? Isn't that kind of a data leakage?
 
+    except FileNotFoundError:
+        error_msg = "Task file not found. No tasks to remove."
+        print(error_msg)
+        logger.error(error_msg)
+    except json.JSONDecodeError as e:
+        error_msg = f"Error parsingn JSON data: {e}"
+        print(error_msg)
+        logger.error(error_msg)
     except ValueError as e:
         print(e)
     except Exception as e:
@@ -166,6 +196,13 @@ while True:
                 "User selected option 4: Exit - Task Manager application shutting down, bye bye"
             )
             break
+
+    except ValueError as e:
+        if "invalid literal for int" in str(e):
+            print("Invalid input. Please enter a number.")
+            logger.warning("User doesn't know what is a number between 1-4")
+        else:
+            print(e)
 
     except Exception as e:
         error_msg = f"An unexpected error occured: {e}"
