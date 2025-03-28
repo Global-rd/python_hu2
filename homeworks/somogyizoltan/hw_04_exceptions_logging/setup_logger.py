@@ -1,6 +1,6 @@
 import logging
 
-log_file_name = "to_do_log_file.log"
+log_file_name = "homeworks/somogyizoltan/hw_04_exceptions_logging/to_do_log_file.log"
 
 def create_file_handler(log_file, level):
     file_handler = logging.FileHandler(log_file)
