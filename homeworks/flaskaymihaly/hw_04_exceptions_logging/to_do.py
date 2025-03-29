@@ -48,15 +48,28 @@ def read_task():
         logging.error(f"The file does not exist!: {e}")
 
 
+
 def remove_task(task_to_remove):
     try:
-        with open("homeworks/flaskaymihaly/hw_04_exceptions_logging/task_manager.txt", "w") as file:
-            file.remove(task_to_remove)
+        # beolvassuk az összes feladatot a fájlból
+        with open("homeworks/flaskaymihaly/hw_04_exceptions_logging/task_manager.txt", "r") as file:
+            lines = file.readlines()
+
+        # ellenőrizzük, hogy van-e olyan feladat, amit törölni szeretnénk
+        if task_to_remove + "\n" in lines:
+            # ha megtaláltuk a feladatot, eltávolítjuk a listából
+            lines.remove(task_to_remove + "\n")
+            # visszaírjuk a fájlba a maradék feladatot a törlés után
+            with open("homeworks/flaskaymihaly/hw_04_exceptions_logging/task_manager.txt", "w") as file:
+                file.writelines(lines)
             print(f"{task_to_remove} removed")
+        else:
+            logging.error(f"Task '{task_to_remove}' not found in the task list.")
+    
     except FileNotFoundError as e:
-        logging.error(f"Error to remove task!: {e}")  
-
-
+        logging.error(f"Error to remove task!: {e}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
         
 
 def display_menu():
