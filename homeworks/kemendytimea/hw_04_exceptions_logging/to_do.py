@@ -10,22 +10,20 @@ logger.addHandler(console_handler)
 file_handler = logging.FileHandler("to_do.log", encoding='utf-8')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
-feladatok = "feladatok.txt"
+to_do_list = "feladatok.txt"
 
 
-if not os.path.exists(feladatok):
+if not os.path.exists(to_do_list):
     try:
-        with open(feladatok, "w", encoding="utf-8") as f:
+        with open(to_do_list, "w", encoding="utf-8") as f:
             pass
     except Exception as e:
-        logger.error(f"Error {feladatok} : {e}")
-
-def read_tasks(feladatok):
+        logger.error(f"Error {to_do_list} : {e}")
+def read_tasks(to_do_list):
     try:
-        with open(feladatok, "r", encoding="utf-8") as f:
+        with open(to_do_list, "r", encoding="utf-8") as f:
             tasks = f.readlines()
             tasks = [task.strip() for task in tasks if task.strip()]
-        logger.info("Tasks added.")
         return tasks
     except Exception as e:
         logger.error(f"Error: {e}")
@@ -35,7 +33,6 @@ def add_task(file_name, task):
     try:
         with open(file_name, "a", encoding="utf-8") as f:
             f.write(task + "\n")
-        logger.info(f"Task added: {task}")
     except Exception as e:
         logger.error(f"Error: {e}")
 
@@ -47,7 +44,6 @@ def remove_task(file_name, task_to_remove):
             with open(file_name, "w", encoding="utf-8") as f:
                 for task in tasks:
                     f.write(task + "\n")
-            logger.info(f"Task removed: {task_to_remove}")
         else:
             logger.info("Error.")
     except Exception as e:
@@ -70,9 +66,9 @@ def main():
 
         if choice == '1':
             task = input("Add task: ")
-            add_task(feladatok, task)
+            add_task(to_do_list, task)
         elif choice == '2':
-            tasks = read_tasks(feladatok)
+            tasks = read_tasks(to_do_list)
             if tasks:
                 print("\nFeladatok:")
                 for idx, task in enumerate(tasks, start=1):
@@ -81,7 +77,7 @@ def main():
                 print("No task")
         elif choice == '3':
             task = input("Which task: ")
-            remove_task(feladatok, task)
+            remove_task(to_do_list, task)
         elif choice == '4':
             print("Exit")
             break
