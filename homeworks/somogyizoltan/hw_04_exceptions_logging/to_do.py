@@ -24,7 +24,6 @@ legyen része a pull request-nek, de a log file-ok ne! Használd a .gitignore-t!
 import os
 import logging
 import setup_logger
-# import datetime as dt
 
 
 # LOGOLÁSHOZ
@@ -72,7 +71,7 @@ def add_new_task(new_act):
         file.close()    
 
 
-# Elvenni egy elemet a listából
+# Elvenni egy adott sorszámú elemet a listából
 def remove_one_task(num_act):
     
     # Tesztelni a bejövő adatot, hogy szám-e
