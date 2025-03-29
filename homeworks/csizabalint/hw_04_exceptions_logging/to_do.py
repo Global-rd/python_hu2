@@ -51,7 +51,9 @@ def load_tasks():
         return []
     try:
         with open(TASKS_FILE, "r", encoding="utf-8") as f:
-            return f.read().splitlines()
+            tasks = f.read().splitlines()
+            logging.info(f"Feladatok betöltve: {tasks}")
+            return tasks
     except Exception as e:
         logging.error(f"Hiba a fájl olvasásakor: {e}")
         return []
@@ -61,6 +63,7 @@ def save_tasks(tasks):
     try:
         with open(TASKS_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(tasks) + "\n")
+        logging.info(f"Feladatok mentve: {tasks}")
     except Exception as e:
         logging.error(f"Hiba a fájl írásakor: {e}")
 
@@ -75,35 +78,40 @@ def add_task():
         except Exception as e:
             logging.error(f"Hiba a feladat mentésekor: {e}")
     else:
-        print("Üres feladat nem adható hozzá!")
+        logging.warning("Üres feladat nem adható hozzá!")
 
 def delete_task():
     """Feladat törlése."""
     tasks = load_tasks()
     if not tasks:
-        print("Nincsenek feladatok.")
+        logging.info("Nincsenek feladatok.")
         return
     
     print("\n--- Feladataid ---")
     for i, task in enumerate(tasks, 1):
         print(f"{i}. {task}")
     
+    choice = input("Melyik feladatot szeretnéd törölni? (szám): ").strip()
+    logging.info(f"Felhasználó választása: {choice}")
+    
     try:
-        choice = int(input("Melyik feladatot szeretnéd törölni? (szám): "))
+        choice = int(choice)
         if 1 <= choice <= len(tasks):
             removed = tasks.pop(choice - 1)
             save_tasks(tasks)
             logging.info(f"Törölt feladat: {removed}")
         else:
-            print("Érvénytelen szám.")
+            logging.warning("Érvénytelen feladat sorszám.")
     except ValueError:
-        print("Kérlek, számot adj meg!")
+        logging.error("Hibás bemenet: számot kell megadni.")
 
 def main():
     """A fő program futtatása."""
     while True:
         show_menu()
         option = input("Válassz egy lehetőséget (1-4): ").strip()
+        logging.info(f"Felhasználó választása: {option}")
+        
         if option == "1":
             add_task()
         elif option == "2":
@@ -113,14 +121,14 @@ def main():
                 for i, task in enumerate(tasks, 1):
                     print(f"{i}. {task}")
             else:
-                print("Nincsenek mentett feladataid.")
+                logging.info("Nincsenek mentett feladataid.")
         elif option == "3":
             delete_task()
         elif option == "4":
             logging.info("A program leáll.")
             break
         else:
-            print("Érvénytelen választás, próbáld újra!")
+            logging.warning("Érvénytelen választás, próbáld újra!")
 
 if __name__ == "__main__":
     main()
