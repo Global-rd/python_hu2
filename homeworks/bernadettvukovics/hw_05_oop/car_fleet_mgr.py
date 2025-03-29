@@ -8,7 +8,12 @@ class Car:
 
     # Method to drive the car, reduces fuel and increases mileage
     def drive(self, km):
+        #Raise error when km is negative.
+        if km < 0:
+            raise NegativeMileageError("Mileage cannot be negative.")
+        
         # Check if there's enough fuel to drive the desired distance
+
         fuel_needed = km * 0.1
         if self.fuel_level >= fuel_needed:
             self.mileage += km
