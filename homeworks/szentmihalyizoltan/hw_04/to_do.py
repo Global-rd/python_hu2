@@ -7,12 +7,12 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 ])
 
 # A feladat elérési útja
-file = ('to_do.txt')
+FILENAME  = ('to_do.txt')
 
 # Feladat olvasása
 def view_task():
     try:
-        with open(file, 'r') as file:
+        with open(FILENAME , 'r') as file:            
             task = file.readlines()
         return task
     except FileNotFoundError:
@@ -22,7 +22,7 @@ def view_task():
 # Feladat hozzáadása  
 def add_task(task):
     try:
-        with open(file, 'a') as file:
+        with open(FILENAME, 'a') as file:
              file.write(task)
     except FileNotFoundError:
         logging.warning(f"{file} nem található. Üres lista visszaadása.")
@@ -30,7 +30,7 @@ def add_task(task):
 # Feladat törlése
 def delete_task(task):
         try:
-            with open(file, 'w') as file:
+            with open(FILENAME, 'w') as file:
                 for number, line in enumerate(task, 0):
                         task.pop(number)
                 file.close()
@@ -52,17 +52,20 @@ def main():
         try:
             display_menu()
             number = int(input("Add meg a feladat számát"))    
-            if number == "1":
-                view_task 
-            elif number == "2":
+            if number == 1:
+                view_task()
+            elif number == 2:
                 task_input = input("Add meg a hozzáadni kívánt feladatot: ")
                 add_task(task_input)
-            elif number == "3":
+            elif number == 3:
                 task_input = input("Add meg a törölni kívánt feladatot: ")
                 delete_task(task_input)
-            elif number == "4":
+            elif number == 4:
                 break            
             else:
                 print("Nem megfelelő tartomány, kérlek válassz 1 és 4 között")
         except ValueError as e:
             print(f"Value error: {e}")
+
+if __name__ == "__main__":
+    main()
