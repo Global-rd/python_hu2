@@ -11,7 +11,6 @@ logging.basicConfig(
     ]
 )
 
-TASKS_FILE = "tasks.txt"
 
 # Feladatok olvasása
 def read_tasks():
