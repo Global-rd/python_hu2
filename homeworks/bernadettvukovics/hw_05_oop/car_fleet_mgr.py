@@ -17,7 +17,7 @@ class Car:
             raise NegativeMileageError("Mileage cannot be negative.")
         
         # Check if there's enough fuel to drive the desired distance
-
+        
         fuel_needed = km * 0.1
         if self.fuel_level >= fuel_needed:
             self.mileage += km
@@ -32,6 +32,9 @@ class Car:
 
     # Method to refuel the car
     def refuel(self, amount):
+        if amount < 0:
+            raise ValueError("Fuel amount cannot be negative.")
+            
         if self.fuel_level + amount <= 100:
             self.fuel_level += amount
             print(f"{self.brand} {self.model} refueled by {amount}%. Current fuel level: {self.fuel_level}%.")
