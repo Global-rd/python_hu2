@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 ])
 
 # A feladat elérési útja
-FILENAME  = 'hw_04/to_do.txt'
+FILENAME = 'homeworks/szentmihalyizoltan/hw_04/to_do.txt'
 
 # Feladat olvasása
 def view_task():
