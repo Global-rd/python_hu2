@@ -1,5 +1,7 @@
 import logging
-valaszok = ["1", "2", "3", "4"]
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', handlers=[logging.StreamHandler(), logging.FileHandler("app.log")])
+
+commands = ["1", "2", "3", "4"]
 
 def add(input):
     if input:
@@ -43,8 +45,8 @@ def choices():
 
 while True:
     choices()
-    choice = str(input("Válassz egy parncsot!: "))
-    if choice in valaszok:
+    choice = str(input("Válassz egy parancsot!: "))
+    if choice in commands:
         if choice == "1":
             user_input = input("\nÍrd le amit hozzá szeretnél adni!: ")
             add(user_input)
@@ -52,7 +54,7 @@ while True:
             view()
         elif choice == "3":
             view()
-            user_input = input("\nAdd meg a számát amelyet ki szeretnél törölni: ")
+            user_input = input("\nAdd meg a számát, melyet ki szeretnél törölni: ")
             try:
                 remove(user_input)
             except Exception as error:
