@@ -12,48 +12,53 @@ FILENAME  = 'hw_04/to_do.txt'
 # Feladat olvasása
 def view_task():
     try:
-        with open(FILENAME , 'r') as file:            
+        with open(FILENAME, 'r') as file:            
             task = file.readlines()
         return task
     except FileNotFoundError:
-        logging.warning(f"{file} nem található. Üres lista visszaadása.")
+        logging.warning(f"{FILENAME} nem található. Üres lista visszaadása.")
         return []
- 
+
 # Feladat hozzáadása  
 def add_task(task):
     try:
         with open(FILENAME, 'a') as file:
-             file.write(task)
+             file.write(task + '\n')  # Új feladat új sorba kerüljön
     except FileNotFoundError:
-        logging.warning(f"{file} nem található. Üres lista visszaadása.")
+        logging.warning(f"{FILENAME} nem található.")
 
 # Feladat törlése
-def delete_task(task):
-        try:
+def delete_task(task_to_remove):
+    try:
+        tasks = view_task()  # Az összes feladatot beolvassuk
+        if task_to_remove + '\n' in tasks:
+            tasks.remove(task_to_remove + '\n')  # Ha benne van a listában, töröljük
             with open(FILENAME, 'w') as file:
-                for number, line in enumerate(task, 0):
-                        task.pop(number)
-                file.close()
-
-        except FileNotFoundError:
-            logging.warning(f"{file} nem található. Üres lista visszaadása.")
-            return []
+                file.writelines(tasks)  # Az új listát visszaírjuk a fájlba
+            logging.info(f"Feladat törölve: {task_to_remove}")
+        else:
+            logging.warning(f"A törlendő feladat nem található: {task_to_remove}")
+    except FileNotFoundError:
+        logging.warning(f"{FILENAME} nem található.")
 
 # Feladatok kiiratása
 def display_menu():
     print("1. View task")
     print("2. Add task")
-    print("1. Remove task")
-    print("1. Exit")
+    print("3. Remove task")
+    print("4. Exit")
 
 # Main rész
 def main():
     while True:
         try:
             display_menu()
-            number = int(input("Add meg a feladat számát"))    
+            number = int(input("Add meg a feladat számát: "))    
             if number == 1:
-                view_task()
+                tasks = view_task()
+                print("Feladatok:")
+                for task in tasks:
+                    print(task.strip())
             elif number == 2:
                 task_input = input("Add meg a hozzáadni kívánt feladatot: ")
                 add_task(task_input)
@@ -65,7 +70,7 @@ def main():
             else:
                 print("Nem megfelelő tartomány, kérlek válassz 1 és 4 között")
         except ValueError as e:
-            print(f"Value error: {e}")
+            print(f"Érvénytelen bemenet: {e}")
 
 if __name__ == "__main__":
     main()
