@@ -1,9 +1,6 @@
 
 #a flotta autóinak "gyártója"
 class Car:
-
-    #a drive metódus által levezetett kilométerek hozzáadása minden kocsi esetében(!)
-    sum_mileage = 0
     
     #konstruktor az attribútumok beállításaira
     def __init__(self, brand:str, model:str, year:int, mileage=float(0.00), fuel_level=float(100.00)):
@@ -21,7 +18,6 @@ class Car:
     def drive (self, mileage=float):
         consume = float(mileage * 0.1)
         if self.fuel_level - consume > 0:
-            Car.sum_mileage += mileage
             self.mileage += mileage
             self.fuel_level -= consume
             print(f"{mileage} km was driven by the {self.model}.\n---Odometer reading: {self.mileage}---\nThe car consumed {consume:.2f}l fuel.\n---Fuel level: {self.fuel_level:.2f}%---")
@@ -42,37 +38,48 @@ class Car:
         else:
             print(f"You can not overload your fuel tank!")
 
-    #az egész flotta által megtett kilométerek kiíratása
-    @classmethod
-    def get_sum_mileage(cls):
-        return cls.sum_mileage
 
-"""
 #a flotta
 class Fleet:
+
+    #összes futott km
+    sum_mileage = 0
 
     #konstruktor az attribútumok beállításaira (mint például a könyvtár --> Lesson10,composition.py)
     def __init__ (self, name:str):
         self.name = name
         self.cars = []
 
+    def list_cars(self):
+        print(f"Aviable cars in {self.name}:")
+        for car in self.cars:
+            print(car)
+
     #kocsi hozzáadása a flottához
     def add_car (self, car:Car):
         self.cars.append(car)
+        print(f"{car} car model added to the fleet successfully.")
 
     #kocsi törlése a flottából
     def remove_car (self, model:str):
         for car in self.cars:
             if car.model == model:
                 self.cars.remove(car)
-                return
-        print(f"Model not found: {model}")
+                print(f"{car} car model was deleted from the fleet successfully.")
+            else:
+                print(f"Model not found: {model}")
 
-    #az egész flotta megtett kilométere összesítve
-    def fleet_mileage (self,):
-        pass
-"""
-car1 = Car("Porsche","GT",1996,0)
+    #az összes autó kilométereit összegzi
+    def update_fleet_mileage(self):
+        total_mileage = 0
+        for car in self.cars:
+            total_mileage += car.mileage
+        Fleet.sum_mileage = total_mileage
+        print(f"Total mileage of the fleet: {Fleet.sum_mileage} km.")
+
+        
+
+car1 = Car("Porsche","GT",1996,)
 print(car1)
 print(car1.mileage)
 print(car1.fuel_level)
@@ -84,4 +91,9 @@ car1.drive(500)
 car1.drive(400)
 car1.drive(400)
 car1.refuel(99)
-print(Car.get_sum_mileage())
+print("-------------------------------------")
+flotta1 = Fleet("Ételfutár Profi Flotta ÉPF")
+flotta1.add_car(car1)
+print(flotta1.name)
+flotta1.list_cars()
+flotta1.update_fleet_mileage()
