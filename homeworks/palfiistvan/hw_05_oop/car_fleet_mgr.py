@@ -1,3 +1,9 @@
+class InvalidAmountError(Exception):
+    """
+    Custom exception for invalid amount on (km) and (refuel).
+    """
+    pass
+
 class Car:
     def __init__(self, brand:str, model:str, year:int):
         self.brand = brand
@@ -7,6 +13,8 @@ class Car:
         self.fuel_level = 100
     
     def drive(self, km):
+        if km <= 0:
+            raise InvalidAmountError("The value of km cannot be zero or negative!")
         fuel_usage = km * 0.1
         if fuel_usage <= self.fuel_level:
             self.mileage += km
@@ -21,8 +29,7 @@ class Car:
 
     def refuel(self, amount):
         if amount <= 0:
-            print("Refueling rate cannot be zero or negative.")
-            return
+            raise InvalidAmountError("Refueling rate cannot be zero or negative!")
         new_fuel_level = self.fuel_level + amount
         if new_fuel_level > 100:
             self.fuel_level = 100
@@ -77,7 +84,7 @@ if __name__ == "__main__":
     # drive & fill
     car1.drive(55)
     car2.drive(350)
-    car3.refuel(12)
+    car3.refuel(-12)
 
     # fleet sataus
     fleet.display_fleet_status()
