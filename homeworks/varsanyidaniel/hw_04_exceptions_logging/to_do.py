@@ -16,10 +16,9 @@ logger.setLevel(logging.DEBUG)
 
 
 def read():
-    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "r") as file:
+    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/tasks.txt" , "r") as file:
         print("\n")
         information = file.readlines()
-        file.close()
         if information == []:
             return print("A feladatlista üres!")
         for i, line in enumerate(information, 0):                                                                   #for i, line in enumerate(file.readlines(), 0):
@@ -28,7 +27,7 @@ def read():
 
 def add(addition):
     try:
-        with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "a") as file:
+        with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/tasks.txt" , "a") as file:
             if addition == "":
                 return logging.warning("\nA feladatlistába nem rakhatsz üres elemeket!\n")
             file.write(f"{addition} \n")
@@ -37,14 +36,16 @@ def add(addition):
 
 
 def remove(removable):
-    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "r") as file:
+    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/tasks.txt" , "r") as file:
         information = file.readlines()
     if information == []:
-        return logging.warning("\nA feladatlista üres!\n")
+        logging.warning("\nA feladatlista üres!\n")
+        return
     elif removable < 0 or removable > len(information):
-        return logging.warning("\nInvalid Number!\n")
+        logging.warning("\nInvalid Number!\n")
+        return
     information.pop(removable)
-    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/.txt" , "w") as file:
+    with open("homeworks/varsanyidaniel/hw_04_exceptions_logging/tasks.txt" , "w") as file:
         file.writelines(information)
 
 
