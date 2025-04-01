@@ -37,35 +37,33 @@ class Car:
         return (f'{self.brand} {self.model} ({self.year})')
 
     def drive(self, mile:float):
-        try:
-            if mile < 0:
-                raise InvalidMileError(f"A megtett kilométer nem lehet negatív szám.")
-            elif self.fuel_level >= 0.1 * mile:
-                self.mileage += mile
-                self.fuel_level -= mile * 0.1
-                print(f"{self}: {mile} km-t vezettél.\n"
-                    f"    A km óra jelenlegi állása: {self.mileage}. Az üzemanyag szint: {self.fuel_level}%\n")
-            else:
-                raise InvalidMileError(f"Nincs ennyi km-re üzemanyag az autóban.\n"
+        if mile < 0:
+            raise InvalidMileError(f"A megtett kilométer nem lehet negatív szám.")
+        elif self.fuel_level >= 0.1 * mile:
+            self.mileage += mile
+            self.fuel_level -= mile * 0.1
+            print(f"{self}: {mile} km-t vezettél.\n"
+                f"    A km óra jelenlegi állása: {self.mileage}. Az üzemanyag szint: {self.fuel_level}%\n")
+        else:
+            raise InvalidMileError(f"Nincs ennyi km-re üzemanyag az autóban.\n"
                                        f"   Az üzemanyag szinted: {self.fuel_level}%, ami csak {self.fuel_level / 0.1} km-re elegendő.\n")
-        except InvalidMileError as ime:
-            print(f"{self}: Hibás kilométer paraméter: {ime}")
+        # except InvalidMileError as ime:
+        #     print(f"{self}: Hibás kilométer paraméter: {ime}")
 
     def refuel(self, refuel_quantity: float):
-        try:
-            if refuel_quantity <= 0:
-                raise InvalidFuelError(f'A tankolás értéke nem lehet negatív vagy 0.\n'
-                                       f'   Jelenlegi üzemanyagszint: {self.fuel_level}%\n')
-            elif self.fuel_level + refuel_quantity <= 100:
-                self.fuel_level += refuel_quantity
-                print(f'{self}: Sikeresen tankoltál {refuel_quantity}% üzemanyagot. A tankban {self.fuel_level}% üzemanyag van.')
+        if refuel_quantity <= 0:
+            raise InvalidFuelError(f'A tankolás értéke nem lehet negatív vagy 0.\n'
+                                    f'   Jelenlegi üzemanyagszint: {self.fuel_level}%\n')
+        elif self.fuel_level + refuel_quantity <= 100:
+            self.fuel_level += refuel_quantity
+            print(f'{self}: Sikeresen tankoltál {refuel_quantity}% üzemanyagot. A tankban {self.fuel_level}% üzemanyag van.')
 
-            else:
-                refuel_quantity = 100 - self.fuel_level
-                self.fuel_level = 100
-                print(f'{self}: Csak {refuel_quantity}% üzemanyagot tudtál tankolni. A tank {self.fuel_level}%-on van.')
-        except InvalidFuelError as ife:
-            print(f"{self}: Hibás üzemanyagszint paraméter: {ife}")
+        else:
+            refuel_quantity = 100 - self.fuel_level
+            self.fuel_level = 100
+            print(f'{self}: Csak {refuel_quantity}% üzemanyagot tudtál tankolni. A tank {self.fuel_level}%-on van.')
+        # except InvalidFuelError as ife:
+        #     print(f"{self}: Hibás üzemanyagszint paraméter: {ife}")
 
 
 """Készíts egy Fleet osztályt, amely kezeli a Car objektumokat:
@@ -119,20 +117,47 @@ fleet.add_car(car3)
 fleet.add_car(car4)
 print("-----------------------------------------")
 
-car1.drive(-200)
-car1.drive(200)
-car1.drive(100)
-car2.drive(50)
-car3.drive(14)
-car4.drive(105)
+for car, mile in [
+    (car1, -200),
+    (car1, 200),
+    (car1, 100),
+    (car2, 50),
+    (car3, 14),
+    (car4, 105)
+]:
+    try:
+        car.drive(mile)
+    except InvalidMileError as ime:
+        print(f"{car}: Hibás üzemanyagszint paraméter: {ime}")
+
+# car1.drive(-200)
+# car1.drive(200)
+# car1.drive(100)
+# car2.drive(50)
+# car3.drive(14)
+# car4.drive(105)
 print("-----------------------------------------")
 
-car1.refuel(-50)
-car2.refuel(0)
-car1.refuel(50)
-car2.refuel(98)
-car3.refuel(15)
-car4.refuel(30)
+for car, refuel_quantity in [
+    (car1, -50),
+    (car2, 0),
+    (car1, 50),
+    (car2, 98),
+    (car3, 15),
+    (car4, 30)
+]:
+    try:
+        car.refuel(refuel_quantity)
+    except InvalidFuelError as ife:
+        print(f"{car}: Hibás üzemanyagszint paraméter: {ife}")
+    
+
+# car1.refuel(-50)
+# car2.refuel(0)
+# car1.refuel(50)
+# car2.refuel(98)
+# car3.refuel(15)
+# car4.refuel(30)
 print("-----------------------------------------")
 
 fleet.show_fleet()
