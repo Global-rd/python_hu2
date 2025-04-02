@@ -1,15 +1,15 @@
 class Car:
-    def __init__(self,brand = str , model = str , creation_date = int):
+    def __init__(self,brand : str , model : str , creation_date : int):
         self.brand = brand
         self.model = model
         self.creation_date = creation_date
         self.mileage = 0
         self.fuel_level = 100
 
-    def drive(self, distance = int):
+    def drive(self, distance : int):
 
         if distance < 0:
-            return print("You cannot drive negative kilometers!")
+            raise Exception("You cannot drive negative kilometers!")
         if self.fuel_level*10 - distance > 0:
             self.fuel_level -= distance/10
             self.mileage += distance
@@ -20,7 +20,9 @@ class Car:
             print(f"The {self.brand} {self.model} ran out of fuel and could only drive {self.fuel_level*10} kilometers.")
             self.fuel_level = 0
         
-    def refuel(self, refill = int):
+    def refuel(self, refill : int):
+        if refill < 0:
+            raise Exception("You cannot refuel negative amounts!")
         if self.fuel_level+refill > 100:
             print(f"The fuel tank of the {self.brand} {self.model} has been refilled to full, with {self.fuel_level+refill-100} fuel left.")
             self.fuel_level = 100
@@ -36,11 +38,11 @@ class Fleet:
     def __init__(self):
         self.cars = []
     
-    def add_car(self, car = Car):
+    def add_car(self, car : Car):
         self.cars.append(car)
         print(f"The new {car.brand} {car.model} has been successfully added to the fleet.")
 
-    def remove_car(self, car = Car):
+    def remove_car(self, car : Car):
         if car in self.cars:
             self.cars.remove(car)
             print(f"The new {car} has been successfully removed from the fleet.")
@@ -50,10 +52,11 @@ class Fleet:
     
     def fleet_info(self):
         if self.cars == []:
-            return print("\nThere are no cars in the fleet!\n")
-        print("- Fleet Info: -")
-        for car in self.cars:
-            print(car.car_info())
+            print("\nThere are no cars in the fleet!\n")
+        else:
+            print("- Fleet Info: -")
+            for car in self.cars:
+                print(car.car_info())
 
 
 fleet=Fleet()
@@ -80,7 +83,8 @@ car2.drive(100)
 car4.drive(500)
 print(car2.car_info())
 
-car5.drive(-200)
+car5.drive(200)
+car5.refuel(200)
 
 fleet.overall_mileage()
 fleet.fleet_info()
