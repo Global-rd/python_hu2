@@ -24,7 +24,7 @@ logger.addHandler(stream_handler)
 # Create a car class with specific attributes and methods
 class Car:
     """
-    A class representing a car with basic attributes like brand and morel and year.
+    A class representing a car with basic attributes like brand and model and year.
     And with basic functionalities like driving and refueling.
     """
 
