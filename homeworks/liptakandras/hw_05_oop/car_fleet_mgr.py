@@ -138,6 +138,8 @@ while True:
                             continue
                         else:
                             car.drive(distance)  # car objektum drive metódusa distance paraméterrel
+                            my_cars.cars[car.model]["km"] = car.km  # visszaírom a listába
+                            my_cars.cars[car.model]["fuel_level"] = car.fuel_level  # visszaírom a listába
 
                 elif select_activity_car_level == 2:
                     refuel_level = int(input("Please add the level of refuelling in %: "))
@@ -149,6 +151,8 @@ while True:
                         continue
                     else:
                         car.refuel(refuel_level)
+                        my_cars.cars[car.model]["fuel_level"] = car.fuel_level  # visszaírom a listába
+                        my_cars.cars[car.model]["km"] = int(car.fuel_level * 10)  # visszaírom a listába
                 
                 elif select_activity_car_level == 3:
                     print("You parked the car.")
