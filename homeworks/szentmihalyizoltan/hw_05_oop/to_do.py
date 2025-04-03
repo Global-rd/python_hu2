@@ -7,6 +7,8 @@ class Car:
         self.fuel_level = 100
 
     def drive(self, kilometers):
+        if kilometers < 0:
+            raise ValueError("A megtett kilométerek nem lehetnek negatívak!")
         fuel_needed = kilometers * 0.1
         if self.fuel_level >= fuel_needed:
             self.mileage += kilometers
@@ -38,6 +40,10 @@ class Fleet:
     def total_mileage(self):
         return sum(car.mileage for car in self.cars)
 
+    def check_car_in_fleet(self, car):
+        if car not in self.cars:
+            raise ValueError(f"{car.brand} {car.model} is not in the fleet")
+
     def __str__(self):
         fleet_info = "Fleet Information:\n"
         for car in self.cars:
@@ -54,10 +60,21 @@ fleet.add_car(car1)
 fleet.add_car(car2)
 fleet.add_car(car3)
 
-car1.drive(90)
-car2.drive(74)
-car3.drive(54)
-car1.refuel(22)
-car2.refuel(32)
+try:
+    fleet.check_car_in_fleet(car1)  
+    car1.drive(90)
+    
+    fleet.check_car_in_fleet(car2)
+    car2.drive(74)
+
+    fleet.check_car_in_fleet(car3)
+    car3.drive(54)
+
+    car1.refuel(22)
+    car2.refuel(32)
+
+    print(fleet)  # Flotta információi
+except ValueError as error:
+    print(f"{error}")
 
 print(fleet)
