@@ -1,7 +1,7 @@
 
-class RangeError(Exception): 
-    pass
 
+class ValueError(Exception): 
+    pass
 
 class Car:
     def __init__(self, brand:str, model:str, year:int):
@@ -17,25 +17,36 @@ class Car:
 
         
 
-    def drive(self, mile:int):
-        range==int(self.fuel_level)*10
+    def drive(self, mile:int):      
+        if mile <= 0:
+            raise ValueError("mile must be positive values!")
         
-        if mile > range:   
-            raise RangeError(f"you can only go {range} km with your current fuel level")
-        else: 
+         
+        
+        fuel_usage = mile * 0.1  
+        if fuel_usage <= self.fuel_level:
             self.mileage += mile
-            self.fuel_level -=mile*0.1
-            print(f"{self}: {mile} km-was covered.\n")
+            self.fuel_level -= fuel_usage
+            print(f"{self.brand} {self.model} ({self.year}) drove {mile} km-s. Current mileage: {self.mileage} km, Fuel: {self.fuel_level:.2f}%")
+        else:
+            limit=int(self.fuel_level)*10  
+            self.mileage +=limit
+            self.fuel_level = 0  
+            print(f"Not enough fuel for {mile} miles. Maximum possible distance with current fuel: {limit} km-s.")
+
+
+
        
     def refuel(self, fuel):
-        if fuel + self.fuel_level <= 100 and fuel >= 0:
+        if fuel < 0:
+            raise ValueError("Fuel cannot be negative")
+        elif self.fuel_level + fuel > 100:
+            self.fuel_level = 100
+            print(f"{self.brand} {self.model} refueled to full (100%)")
+        else:
             self.fuel_level += fuel
             print(f"{self.brand} {self.model} refueled by {fuel}%")
-        elif fuel < 0:
-            print("Fuel cannot be negative")
-        else:
-            self.fuel_level = 100
-            print(f"{self.brand} {self.model} is on max fuel ({self.fuel_level}%)")
+
 
 
 class Fleet:
