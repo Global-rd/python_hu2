@@ -7,7 +7,7 @@ class Car:
         self.fuel_level = 100
 
     def drive(self, distance):
-        max_distance = self.fuel_level * 10  # 0.1% per km -> 100% = 1000 km
+        max_distance = self.fuel_level * 10 
         if distance > max_distance:
             distance = max_distance
         self.mileage += distance
@@ -45,7 +45,6 @@ class Fleet:
             print(f"{car.brand} {car.model} ({car.year}) - Mileage: {car.mileage} km, Fuel: {car.fuel_level:.1f}%")
         print(f"Total fleet mileage: {self.total_mileage()} km")
 
-# Example usage
 car1 = Car("Volksawagen", "Passat", 2020)
 car2 = Car("Audi", "A4", 2018)
 car3 = Car("Mercedes-Benz", "S320", 2022)
