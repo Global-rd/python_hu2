@@ -73,7 +73,7 @@ try:
     car1.refuel(22)
     car2.refuel(32)
 
-    print(fleet)  # Flotta információi
+    print(fleet)  
 except ValueError as error:
     print(f"{error}")
 
