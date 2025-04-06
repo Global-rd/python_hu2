@@ -7,6 +7,8 @@ class Car:
         self.fuel_level = 100
 
     def drive(self, km):
+        if km < 0:
+            raise ValueError("Distance cannot be negative.")
         needed_fuel = km * 0.1
         if needed_fuel > self.fuel_level:
             km = self.fuel_level / 0.1
@@ -17,6 +19,9 @@ class Car:
             self.mileage += km
 
     def refuel(self, amount):
+        if amount < 0:
+          raise ValueError("Fuel cannot be negative.")
+        
         self.fuel_level += amount
         if self.fuel_level > 100:
             self.fuel_level = 100
@@ -34,6 +39,8 @@ class Fleet:
     def remove_car(self, car):
         if car in self.cars:
             self.cars.remove(car)
+        else:
+            print("The car is not in the fleet.")
 
     def total_mileage(self):
         total = 0
