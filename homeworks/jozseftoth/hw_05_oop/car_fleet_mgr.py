@@ -10,6 +10,14 @@ class Car:
 
     #drive
     def drive(self, distance):
+        if distance < 0: 
+            raise ValueError("Distance cannot be negative.")
+        if self.fuel_level <= 0:
+            print("Fuel tank is empty. Please refuel.")
+            return
+        if distance > self.max_distance():
+            print(f"Cannot drive {distance} km. Maximum distance is {self.max_distance()} km.")
+            return
         fuel_needed = distance * 0.1
         if fuel_needed <= self.fuel_level:
             self.mileage += distance
@@ -19,6 +27,8 @@ class Car:
 
     #refuel
     def refuel(self, amount):
+        if amount < 0:
+            raise ValueError("Amount cannot be negative.")  
         if self.fuel_level + amount > 100:
             self.fuel_level = 100
         else:
@@ -40,7 +50,11 @@ class Fleet:
         self.cars.append(car)
 
     def remove_car(self, car):
-        self.cars.remove(car)
+        if car in self.cars: 
+            self.cars.remove(car)
+            print(f"{car} has been successfully removed from the fleet.")
+        else:   
+            print(f"{car} not found in the fleet.")
 
     def total_mileage(self):
         return sum(car.mileage for car in self.cars)
@@ -59,8 +73,8 @@ if __name__ == "__main__":
     fleet.add_car(car2)
     fleet.add_car(car3)
 
-    car1.drive(10000)
-    car2.drive(413)
+    car1.drive(100)
+    car2.drive(50) 
     car3.drive(330)
     car3.refuel(23)
 
