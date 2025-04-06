@@ -19,7 +19,7 @@ class Car:
        
         if self.fuel_level > 0:  # feltétel, különben nem tud vezetni
             if self.fuel_level >= fuel_consumption:
-                self.km -= distance
+                self.km += distance
                 self.fuel_level -= fuel_consumption
                 print(f"Distance made: {distance}, Fuel: {self.fuel_level}%")
             else:
