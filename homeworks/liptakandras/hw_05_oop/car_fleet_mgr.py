@@ -9,7 +9,10 @@ class Car:
         self.fuel_level = fuel_level
 
     def drive(self, distance):
-              
+        
+        if distance < 0:
+            raise ValueError("Distance cannot be negative number!")  # JAVÍTÁS: gondolom itt is ValueErrort kell adni     
+        
         fuel_consumption = distance / 10  # 1 km-enként 0,1% 
        
         if self.fuel_level > 0:  # feltétel, különben nem tud vezetni
@@ -25,9 +28,9 @@ class Car:
     def refuel(self, refuel_level):
 
         if refuel_level <= 0:
-            print(f"Refuel level must be greater than 0%!")
+            raise ValueError("Refuel level must be greater than 0%!")  # JAVÍTÁS: ValueError
         elif refuel_level > 100:
-            print(f"Fuel level cannot be greater than 100%!")
+            raise ValueError("Fuel level cannot be greater than 100%!") # JAVÍTÁS: ValueError - gondolom akkor már erre is így kellene
         elif refuel_level <= self.fuel_level:
             print("You have enough fuel!")
         else:
@@ -35,44 +38,40 @@ class Car:
             print(f"Fuel level: {self.fuel_level}%")
         print(f"Maximum distance left: {self.fuel_level * 10} km")
 
-class Cars:
+class Fleet:
 
     def __init__(self):
-        self.cars = {}  # dictionary a brand, model, year, km, fuel level miatt
+        self.fleet = []  # dictionary a brand, model, year, km, fuel level miatt
 
     def add_car(self, car: Car):  # hivatkozom a Car osztályra
-        self.cars[car.model] = {  # minden autó egy dictionary, tehát dictionary a listában
-            "brand": car.brand,
-            "model": car.model,
-            "year": car.year,
-            "km": car.km,
-            "fuel_level": car.fuel_level,
-        }
-        print(f"Car added to the list of cars.")
+        self.fleet.append(car)  # JAVÍTÁS: autó hozzáadása
+        print(f"Car added to the fleet.")
     
     def remove_car(self, model: str):
-        if model in self.cars:
-            del self.cars[model]
-        else:
-            print("This car is not on the list of cars!")
+        for car in self.fleet:  # JAVÍTÁS: iterálom a modelleket
+            if car.model == model:  # JAVÍTÁS: ha egyezik a törlendővel, töröltetem
+                self.fleet.remove(car)
+                print(f"{model} removed from the fleet.")
+                return  # JAVÍTÁS: csak az elsőt távolítsa el
+        print(f"{model} is not on the fleet!")
     
     def total_km(self):
-        return sum(car["km"] for car in self.cars.values())
+        return sum(car.km for car in self.fleet)
     
-    def print_cars(self):  # enélkül nem engedett hozzáadni új autót, de nem teljesen értem
-        print("List of cars:")
-        for model, car_data in self.cars.items():
-            print(f"{car_data['brand']} {car_data['model']}, {car_data['year']}, {car_data['km']}km, fuel: {car_data['fuel_level']}%")
+    def print_fleet(self):  # enélkül nem engedett hozzáadni új autót, de nem teljesen értem
+        print("List of fleet:")
+        for car in self.fleet:
+            print(f"{car.brand} {car.model}, {car.year}, {car.km}km, fuel: {car.fuel_level}%")
 
 # LOGIKA:
 
-my_cars = Cars()
+my_fleet = Fleet()
 
 while True:
 
-    my_cars.print_cars()  # itt kiiratom a dictionary-t
+    my_fleet.print_fleet()  # itt kiiratom a dictionary-my_fleet.print_fleet()t
 
-    activity_list_cars_level = {
+    activity_list_fleet_level = {
         1: "add car",
         2: "remove car",
         3: "select car",  
@@ -81,11 +80,11 @@ while True:
 
     # listázom az opciókat
 
-    for activities_cars_level in activity_list_cars_level:
-        print(f"{activities_cars_level}: {activity_list_cars_level[activities_cars_level]}")
-    select_activity_cars_level = int(input("Select activity! Add number of option! "))
+    for activities_fleet_level in activity_list_fleet_level:
+        print(f"{activities_fleet_level}: {activity_list_fleet_level[activities_fleet_level]}")
+    select_activity_fleet_level = int(input("Select activity! Add number of option! "))
 
-    if select_activity_cars_level == 1:
+    if select_activity_fleet_level == 1:
               
         #Bekérem az új autó adatait
         print("Enter car data!")
@@ -97,23 +96,25 @@ while True:
 
         new_car = Car(brand, model, year, km, fuel_level)
 
-        my_cars.add_car(new_car)
+        my_fleet.add_car(new_car)
 
-    elif select_activity_cars_level == 2:
+    elif select_activity_fleet_level == 2:
         
         model = input("Enter model of car to remove: ")  # model alapján törlök
-        my_cars.remove_car(model)  # az előbb definiált model megadott értéke alapján törlöm az autót a listából
+        my_fleet.remove_car(model)  # az előbb definiált model megadott értéke alapján törlöm az autót a listából
 
-    elif select_activity_cars_level == 3:
+    elif select_activity_fleet_level == 3:
         
-        model = input("Enter model to select: ")  # model alapján választhat autót
-        if model in my_cars.cars:  # autóválasztás feltétele, hogy már létezik a listában
-            selected_car = my_cars.cars[model]
-            car = Car(selected_car["brand"], selected_car["model"], selected_car["year"], selected_car["km"], selected_car["fuel_level"])
+        model = input("Enter model to select: ")  # JAVÍTÁS: listaként kell kezelni
+        for car in my_fleet.fleet:
+            if car.model == model:
+                selected_car = car
+                break
         
         
             # KIVÁLASZTOTT AUTÓ KM ÉS FOGYASZTÁS VÁLTOZÁSA
 
+        if selected_car:  # JAVÍTÁS: enélkül ha nincs talált egyezés a listában, akkor is elindul a loop
             while True:
                 activity_list_car_level = {
                     1: "drive",
@@ -133,26 +134,22 @@ while True:
                         continue  # vissza a loop elejére
                     else:
                         distance = int(input("Distance you drove in km: "))
-                        if distance > car.fuel_level * 10: # maximum távolság
-                            print(f"Maximum distance with your fuel level is {car.fuel_level * 10} km. Enter valid distance!")
+                        if distance > selected_car.fuel_level * 10: # maximum távolság
+                            print(f"Maximum distance with your fuel level is {selected_car.fuel_level * 10} km. Enter valid distance!")
                             continue
                         else:
-                            car.drive(distance)  # car objektum drive metódusa distance paraméterrel
-                            my_cars.cars[car.model]["km"] = car.km  # visszaírom a listába
-                            my_cars.cars[car.model]["fuel_level"] = car.fuel_level  # visszaírom a listába
+                            selected_car.drive(distance)  # car objektum drive metódusa distance paraméterrel
 
                 elif select_activity_car_level == 2:
                     refuel_level = int(input("Please add the level of refuelling in %: "))
-                    if refuel_level <= car.fuel_level:  # nem lehet kisebb, mint ami van
+                    if refuel_level <= selected_car.fuel_level:  # nem lehet kisebb, mint ami van
                         print(f"You have enough fuel!")
                         continue
                     elif refuel_level > 100:  # nem lehet nagyobb, mint 100%
                         print (f"The maximum fuel level can be 100%!")
                         continue
                     else:
-                        car.refuel(refuel_level)
-                        my_cars.cars[car.model]["fuel_level"] = car.fuel_level  # visszaírom a listába
-                        my_cars.cars[car.model]["km"] = int(car.fuel_level * 10)  # visszaírom a listába
+                        selected_car.refuel(refuel_level)
                 
                 elif select_activity_car_level == 3:
                     print("You parked the car.")
@@ -164,10 +161,11 @@ while True:
                     print("Choose a valid option!")
                     continue
 
-    elif select_activity_cars_level == 4:
-        pass
+        else:
+            print("Car not found!")
+
+    elif select_activity_fleet_level == 4:
+        break
     else:
         print("Choose a valid option!")
         continue
-
-    my_cars.print_cars()
