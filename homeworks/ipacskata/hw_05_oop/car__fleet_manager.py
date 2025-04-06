@@ -15,7 +15,9 @@ class Car:
     
     
     def drive(self):
-        mileage = int(input("How far did you drive in km?"))    
+        mileage = int(input("How far did you drive in km?")) 
+        if mileage <= 0:
+           raise ValueError("Mileage must be a positive number.")   
    
         required_fuel = mileage * 0.1 
         if self.fuel_level < required_fuel:
@@ -33,6 +35,9 @@ class Car:
   
     def refuel_car(self):
         amount = float(input("How much did you refuel the car with?"))
+        if amount <= 0:
+           raise ValueError("Fuel amount must be a positive number.")
+        
         if self.fuel_level + amount > 100:
             print ("You trying to put too much fuel!")
             return
@@ -48,7 +53,12 @@ class Fleet:
         self.cars.append(car)
 
     def remove_car (self, car:Car):
-        self.cars.remove(car)  
+        if car in self.cars:
+         self.cars.remove(car)
+         print(f"{car.brand} {car.modell} removed from the fleet.")
+        else:
+             print(f"{car.brand} {car.modell} is not in the fleet!")
+    
 
     def all_mileage(self):
         total = 0
