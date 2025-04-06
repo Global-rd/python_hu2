@@ -7,6 +7,9 @@ class Car:
         self.fuel_level = 100.0
 
     def drive(self, kilometers):
+        if kilometers < 0:
+            raise ValueError("Distance must be a positive number.")
+        
         fuel_consumption = kilometers * 0.1
         if fuel_consumption <= self.fuel_level:
             self.mileage += kilometers
@@ -19,6 +22,9 @@ class Car:
             print(f"{self.brand} {self.model} distance is {max_drive} km, fuel tank is empty.")
 
     def refuel(self, fuel):
+        if fuel < 0:
+            raise ValueError("Fuel amount must be a positive number.")  
+
         self.fuel_level = min(100, self.fuel_level + fuel)
         print(f"{self.brand} {self.model} refuel {fuel} liters of fuel.")
 
