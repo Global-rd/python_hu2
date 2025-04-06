@@ -28,6 +28,7 @@ végre néhány műveletet (vezetés, tankolás), jelenítsd meg az autók
 """
 
 
+
 #  Létrehozni a Car osztályt, amit kibővítettem egy új paraméterrel ami a rendszám, hogy könnyeben lehessen egy adott autóra hivatkozni 
 class Car:
     def __init__(self, c_registered_num:str, c_brand: str, c_model: str, c_year: int, c_mileage:int=0, c_fuel_level:float=100.0):
@@ -43,21 +44,33 @@ class Car:
         return f"{self.brand} {self.model} - registration year: {self.year} - registered number: {self.registered_num} - km: {self.mileage} - fuel: {self.fuel_level}"
     
     def drive(self, running_km:int):
-        if self.fuel_level >= 0.1*running_km:
-            self.mileage += running_km
-            self.fuel_level -= 0.1*running_km
-            print(f"{self} car mileage is added to car.")
+        
+        if running_km < 0:
+            print("Km must be a positive number!") 
+        
         else:
-            print(f"{self} in car is not enought fuel!")
+            if self.fuel_level >= 0.1*running_km:
+                self.mileage += running_km
+                self.fuel_level -= 0.1*running_km
+                print(f"{self} car mileage is added to car.")
+            else:
+                print(f"{self} in car is not enought fuel!")
+    
 
     def refuel(self, fuel_level):
-        if self.fuel_level + fuel_level <= 100:
-            self.fuel_level += fuel_level
-            print(f"{self} - car have a {self.fuel_level} fuel")
-        else:
-            self.fuel_level = 100.0
-            print(f"{self} - car have a full fuel")    
 
+        if fuel_level < 0:
+            print("Fuel level must be a positive number!")  
+        
+        else:
+            if self.fuel_level + fuel_level <= 100:
+                self.fuel_level += fuel_level
+                print(f"{self} - car have a {self.fuel_level} fuel")
+            else:
+                self.fuel_level = 100.0
+                print(f"{self} - car have a full fuel")    
+
+        
 
 class Fleet:
     def __init__(self):
