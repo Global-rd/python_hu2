@@ -21,6 +21,13 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 
+# Custom exception class
+class NegativeValueError(Exception):
+    """Exception raised when a negative value is provided where only positive is allowed."""
+
+    pass
+
+
 # Create a car class with specific attributes and methods
 class Car:
     """
@@ -51,6 +58,13 @@ class Car:
         """
         Simulating car driving for a given km distance
         """
+
+        # Guard clause to prevent negative kilometers
+        if kilometers < 0:
+            raise NegativeValueError(
+                "Cannot drive negative kilometers, that is like rolling back the clock... illegal"
+            )
+
         logger.info(
             f"Attempting to drive {kilometers} km with {self.brand}{self.model}"
         )
@@ -83,6 +97,13 @@ class Car:
         """
         Refuel the car by a specified amount in percentage points
         """
+
+        # Guard clause to prevent negative fuel addition
+        if percentage_points_to_add < 0:
+            raise NegativeValueError(
+                "Cannot add negative amount of fuel, that would be stealing"
+            )
+
         logger.info(
             f"Adding {percentage_points_to_add}% fuel to {self.brand}{self.model}"
         )
