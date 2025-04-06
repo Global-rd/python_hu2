@@ -9,7 +9,6 @@ class Car:
     def drive(self, distance: float):
         if distance <= 0:
             raise ValueError("Cannot drive a non-positive distance.")
-            return
         fuel_for_drive = distance * 0.1  # 0.1% üzemanyag
         max_distance = self.fuel_level / 0.1
         if fuel_for_drive > self.fuel_level:
@@ -23,7 +22,7 @@ class Car:
     
     def refuel(self, amount: float):
         if amount <= 0:
-            print("The amount of fuel to be added must be positive.")
+             raise ValueError("The amount of fuel to be added must be positive.")
         elif self.fuel_level + amount > 100:
             self.fuel_level = 100
             print(f"The {self.brand} {self.model}'s fuel tank is full, no need for more fuel. Current fuel level: {self.fuel_level}%.")
