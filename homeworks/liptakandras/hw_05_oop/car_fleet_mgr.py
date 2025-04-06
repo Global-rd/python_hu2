@@ -1,12 +1,14 @@
 
 
 class Car:
-    def __init__(self, brand:str, model:str, year:int, km: int = 0, fuel_level: int = 100):  # a year-nek is str a hintje?
+    def __init__(self, brand:str, model:str, license_plate_number: str, year:int, km: int = 0, fuel_level: int = 100):  # a year-nek is str a hintje?
         self.brand = brand
         self.model = model
+        self.license_plate_number = license_plate_number  # JAVÍTÁS: rendszám
         self.year = year
         self.km = km
         self.fuel_level = fuel_level
+
 
     def drive(self, distance):
         
@@ -17,7 +19,7 @@ class Car:
        
         if self.fuel_level > 0:  # feltétel, különben nem tud vezetni
             if self.fuel_level >= fuel_consumption:
-                self.km += distance
+                self.km -= distance
                 self.fuel_level -= fuel_consumption
                 print(f"Distance made: {distance}, Fuel: {self.fuel_level}%")
             else:
@@ -34,26 +36,37 @@ class Car:
         elif refuel_level <= self.fuel_level:
             print("You have enough fuel!")
         else:
+            fuel_difference = refuel_level -self.fuel_level
             self.fuel_level += (refuel_level - self.fuel_level)
+            self.km += fuel_difference * 10
             print(f"Fuel level: {self.fuel_level}%")
         print(f"Maximum distance left: {self.fuel_level * 10} km")
+    
+    def __str__(self):
+        return f"License plate number: {self.brand} {self.model}, {self.license_plate_number}, {self.year}, {self.km}km, fuel: {self.fuel_level}%"
+
 
 class Fleet:
 
     def __init__(self):
-        self.fleet = []  # dictionary a brand, model, year, km, fuel level miatt
+        self.fleet = []
 
     def add_car(self, car: Car):  # hivatkozom a Car osztályra
         self.fleet.append(car)  # JAVÍTÁS: autó hozzáadása
         print(f"Car added to the fleet.")
     
-    def remove_car(self, model: str):
-        for car in self.fleet:  # JAVÍTÁS: iterálom a modelleket
-            if car.model == model:  # JAVÍTÁS: ha egyezik a törlendővel, töröltetem
-                self.fleet.remove(car)
-                print(f"{model} removed from the fleet.")
-                return  # JAVÍTÁS: csak az elsőt távolítsa el
-        print(f"{model} is not on the fleet!")
+    def remove_car(self, license_plate_number: str):  # JAVÍTÁS: rendszám alapján törlök
+        car_to_remove = None
+        for car in self.fleet:
+            if car.license_plate_number == license_plate_number:
+                car_to_remove = car
+                break
+
+        if car_to_remove:
+            self.fleet.remove(car_to_remove)
+            print(f"Car with license plate {license_plate_number} deleted from fleet")
+        else:
+            print(f"Car with license plate {license_plate_number} is not present in fleet")
     
     def total_km(self):
         return sum(car.km for car in self.fleet)
@@ -61,8 +74,7 @@ class Fleet:
     def print_fleet(self):  # enélkül nem engedett hozzáadni új autót, de nem teljesen értem
         print("List of fleet:")
         for car in self.fleet:
-            print(f"{car.brand} {car.model}, {car.year}, {car.km}km, fuel: {car.fuel_level}%")
-
+            print(car)
 # LOGIKA:
 
 my_fleet = Fleet()
@@ -90,30 +102,29 @@ while True:
         print("Enter car data!")
         brand = input("Brand: ")
         model = input("Model: ")
+        license_plate_number = input("License plate number: ")  # JAVÍTÁS: rendszám bekérése
         year = int(input("Year: "))
         fuel_level = int(input("Fuel_level in %: "))  # erre nem írtam most validációs feltételt, ahogy a car osztályban van
         km = int(fuel_level * 10)
 
-        new_car = Car(brand, model, year, km, fuel_level)
+        new_car = Car(brand, model, license_plate_number, year, km, fuel_level)
 
         my_fleet.add_car(new_car)
 
     elif select_activity_fleet_level == 2:
         
-        model = input("Enter model of car to remove: ")  # model alapján törlök
-        my_fleet.remove_car(model)  # az előbb definiált model megadott értéke alapján törlöm az autót a listából
+        license_plate_number = input("Enter license plate number of car to remove: ")  # model alapján törlök
+        my_fleet.remove_car(license_plate_number)  # az előbb definiált model megadott értéke alapján törlöm az autót a listából
 
     elif select_activity_fleet_level == 3:
         
-        model = input("Enter model to select: ")  # JAVÍTÁS: listaként kell kezelni
+        license_plate_number = input("Enter car's license plate number to select: ")  # JAVÍTÁS: listaként kell kezelni
+                
         for car in my_fleet.fleet:
-            if car.model == model:
+            if car.license_plate_number == license_plate_number:
                 selected_car = car
                 break
         
-        
-            # KIVÁLASZTOTT AUTÓ KM ÉS FOGYASZTÁS VÁLTOZÁSA
-
         if selected_car:  # JAVÍTÁS: enélkül ha nincs talált egyezés a listában, akkor is elindul a loop
             while True:
                 activity_list_car_level = {
