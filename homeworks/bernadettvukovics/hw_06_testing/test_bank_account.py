@@ -1,44 +1,7 @@
 import pytest
 from bank_account import BankAccount  # import the BankAccount class
 
-class BankAccount:
-    def __init__(self, balance=0):
-        if not isinstance(balance, (int, float)):
-            raise ValueError("Initial balance must be a number.")
-        if balance < 0:
-            raise ValueError("Initial balance cannot be negative.")
-        self.balance = balance
 
-    def deposit(self, amount):
-        if not isinstance(amount, (int, float)):
-            raise ValueError("Deposit amount must be a number.")
-        if amount <= 0:
-            raise ValueError("Deposit amount must be greater than 0.")
-        self.balance += amount
-
-    def withdraw(self, amount):
-        if not isinstance(amount, (int, float)):
-            raise ValueError("Withdrawal amount must be a number.")
-        if amount <= 0:
-            raise ValueError("Withdrawal amount must be greater than 0.")
-        if amount > self.balance:
-            raise ValueError("Insufficient funds.")
-        self.balance -= amount
-
-    def transfer(self, other_account, amount):
-        if not isinstance(other_account, BankAccount):
-            raise TypeError("The recipient must be a BankAccount object.")
-        if other_account == self:
-            raise ValueError("Cannot transfer money to the same account.")
-        if not isinstance(amount, (int, float)):
-            raise ValueError("Transfer amount must be a number.")
-        if amount <= 0:
-            raise ValueError("Transfer amount must be greater than 0.")
-        if amount > self.balance:
-            raise ValueError("Insufficient funds for transfer.")
-        self.balance -= amount
-        other_account.deposit(amount)
-        
 # Fixture 1: A BankAccount object with an initial balance of 100
 @pytest.fixture
 def account_with_balance():
