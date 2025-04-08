@@ -46,4 +46,24 @@ def test_for_insufficient_funds(empty_account):
     with pytest.raises(ValueError):
         empty_account.withdraw(100)
 
+#--- tesztek az extra házira ---
 
+# account object létrehozásánál szám helyett karakter megadása balance-nak
+def test_account_balance_with_chars():
+    with pytest.raises(TypeError):
+        BankAccount("User","abc")
+
+# deposit karakterekkel
+def test_deposit_with_chars(registered_account_with_amount):
+    with pytest.raises(TypeError):
+        registered_account_with_amount.deposit("abc")
+
+# withdraw karakterekkel
+def test_withdraw_with_chars(registered_account_with_amount):
+    with pytest.raises(TypeError):
+        registered_account_with_amount.withdraw("abc")
+
+# transfer magamnak
+def test_transfer_to_own_account(registered_account_with_amount):
+    with pytest.raises(ValueError):
+        registered_account_with_amount.transfer(100,registered_account_with_amount)
