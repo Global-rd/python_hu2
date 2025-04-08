@@ -26,8 +26,10 @@ eltávolítására a flottába/flottából.
 végre néhány műveletet (vezetés, tankolás), jelenítsd meg az autók
 állapotát és a flotta összesítő adatait."
 """
+# Hibaüzenet miatt
 
-
+class NegativeUserInput(Exception):
+    pass
 
 #  Létrehozni a Car osztályt, amit kibővítettem egy új paraméterrel ami a rendszám, hogy könnyeben lehessen egy adott autóra hivatkozni 
 class Car:
@@ -46,7 +48,7 @@ class Car:
     def drive(self, running_km:int):
         
         if running_km < 0:
-            print("Km must be a positive number!") 
+            raise NegativeUserInput("Km must be a positive number!") 
         
         else:
             if self.fuel_level >= 0.1*running_km:
@@ -60,7 +62,7 @@ class Car:
     def refuel(self, fuel_level):
 
         if fuel_level < 0:
-            print("Fuel level must be a positive number!")  
+            raise NegativeUserInput("Fuel level must be a positive number!")  
         
         else:
             if self.fuel_level + fuel_level <= 100:
