@@ -1,28 +1,31 @@
 import pytest
-from extra import BankAccount
+from bank_account import BankAccount
 
 @pytest.fixture
 def account_1():    
-    return BankAccount(owner = "Jimmy Jimmerson", amount = 3000.0)
+    return BankAccount(owner = "Jimmy Jimmerson", balance = 300.0)
 
 @pytest.fixture
 def account_2():
-    return BankAccount(owner = "Jack Jackerson", amount = 5000.0)
+    return BankAccount(owner = "Jack Jackerson", balance = 500.0)
 
-@pytest.mark.parametrize("balance, withdraw, expected_exception", [
-    (300, 500, ValueError), #negative balance
-    (0, 500, ValueError), #zero balance
-    (-500, 300, ValueError), #attempt from negative balance    
+@pytest.mark.parametrize("deposit_money, balance", [
+    (20, 70, ValueError), #normal deposit
+    (0, 60, ValueError), #zero balance
+    (-40, 30, ValueError), #negative deposit    
 ])
 
-def test_withdraw(account_1, withdraw, balance, expected_exception):
-    if expected_exception:
-        with pytest.raises(ValueError, match="Withdraw amount must be positive." if withdraw <= 0 else "Insufficient funds."):
-            account_1.withdraw(withdraw)
+def test_deposit(account_1, deposit_money, balance):
+    if deposit_money <= 0:
+        with pytest.raises(ValueError, match="Deposit amount must be positive."):
+            account_1.deposit(deposit_money)
     else:
-        account_1.withdraw(withdraw)
+        account_1.deposit(deposit_money)
         assert account_1.get_balance() == balance
 
 def test_transfer_invalid_target(account_1):
     with pytest.raises(TypeError, match="It is not a bank avvount"):
         account_1.transfer(200, "Not a bank account") 
+
+def test_str(account_1):
+    assert str(account_1) == "This account belongs to: Jimmy Jimmerson, Balance: 300.0"
