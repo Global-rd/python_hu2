@@ -3,15 +3,15 @@ from bank_account import BankAccount
 
 @pytest.fixture
 def account_1():
-    return BankAccount("Thomas",100)
+    return BankAccount("Thomas" , 100)
 
 @pytest.fixture
 def account_2():
     return BankAccount("Dexter")
 
 def test_basic_inputs(account_1):
-    account_1.withdraw(50.0)
-    assert account_1.items["balance"] == 50
+    account_1.withdraw(50)
+    assert account_1.get_balance == 50
 
 
 @pytest.mark.parametrize("account_name, balance, expected_error", [
