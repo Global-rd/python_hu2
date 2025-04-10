@@ -105,7 +105,7 @@ def test_transfer_invalid_target(account_with_balance):
 # Test that initializing the account with wrong input raises an error
 def test_init_with_non_numeric_balance():
     """
-    Test that initializingg an account with a not-useable balance input raises an error.
+    Test that initializing an account with an unusable balance input raises an error.
     """
     with pytest.raises(TypeError):
         BankAccount(owner="Type Error Tim", balance="not a number")
