@@ -24,15 +24,15 @@ class BankAccount:
         self.balance += amount
 
     def withdraw(self, amount: float):  # remove money from the account
+        # Validate for non-number inputs
+        if not isinstance(amount, (int, float)):
+            raise TypeError("Withdrawal amount must be a number")
         # Validate for non-negative number input
         if amount <= 0:
             raise ValueError("Withdraw amount must be positive.")
         # Validate for sufficient balance
         if amount > self.balance:
             raise ValueError("Insufficient funds.")
-        # Validate for non-number inputs
-        if not isinstance(amount, (int, float)):
-            raise TypeError("Withdrawal amount must be a number")
         self.balance -= amount
 
     def transfer(
