@@ -16,7 +16,7 @@ class BankAccount:
     def deposit(self, amount: float):  # adding money to the account
         # Validate non-number input
         if not isinstance(amount, (int, float)):
-            raise TypeError("Deposit amount must be a nimber")
+            raise TypeError("Deposit amount must be a number")
         # Validate for non-negative number input
         if amount <= 0:
             raise ValueError("Deposit amount must be positive.")
