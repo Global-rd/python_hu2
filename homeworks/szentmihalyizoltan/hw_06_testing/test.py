@@ -9,22 +9,18 @@ def account_1():
 def account_2():
     return BankAccount(owner = "Jack Jackerson", balance = 500.0)
 
-@pytest.mark.parametrize("deposit_money, balance", [
-    (20, 70, ValueError), #normal deposit
-    (0, 60, ValueError), #zero balance
-    (-40, 30, ValueError), #negative deposit    
-])
-
-def test_deposit(account_1, deposit_money, balance):
+@pytest.mark.parametrize("deposit_money", [20, 0, -40])
+def test_deposit(account_1, deposit_money):
     if deposit_money <= 0:
         with pytest.raises(ValueError, match="Deposit amount must be positive."):
             account_1.deposit(deposit_money)
     else:
+        starting_balance = account_1.get_balance()
         account_1.deposit(deposit_money)
-        assert account_1.get_balance() == balance
+        assert account_1.get_balance() == starting_balance + deposit_money
 
 def test_transfer_invalid_target(account_1):
-    with pytest.raises(TypeError, match="It is not a bank avvount"):
+    with pytest.raises(TypeError, match="It is not a bank account"):
         account_1.transfer(200, "Not a bank account") 
 
 def test_str(account_1):
