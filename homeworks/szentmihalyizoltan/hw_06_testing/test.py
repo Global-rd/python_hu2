@@ -25,3 +25,5 @@ def test_transfer_invalid_target(account_1):
 
 def test_str(account_1):
     assert str(account_1) == "This account belongs to: Jimmy Jimmerson, Balance: 300.0"
+
+#test sor a github miatt
