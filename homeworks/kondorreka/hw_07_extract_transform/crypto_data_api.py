@@ -22,5 +22,5 @@ def crypto_data():
     if response.status_code ==200:
         return response.json()
     else: 
-        raise Exception(f"Hiba a lekérdezés során. Hibakód: {response.status_code}")
+        raise Exception(f"Hiba a lekérdezés során. Hibakód: {response.status_code}.  Hibaüzenet: {response.text}")
         

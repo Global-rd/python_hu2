@@ -1,10 +1,10 @@
 """Tárold el ezeket egy dataframe-ben és oldd meg a következő feladatokat pandas
 segítségével:
 """
-from def_crypto_data_api import crypto_data #api függvény import
+from crypto_data_api import crypto_data #api függvény import
 import pandas as pd
 import sys
-from def_direction import direction
+from direction import direction
 
 try:
     crypto = pd.DataFrame(crypto_data()) #Pandas DataFrame létrehozása
