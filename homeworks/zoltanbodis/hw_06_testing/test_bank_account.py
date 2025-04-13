@@ -4,7 +4,7 @@ from bank_account import BankAccount, Person
 # Írj legalább 2 fixture-t (2 különböző BankAccount object), amiket a tesztjeidben használsz.
 @pytest.fixture
 def account_with_postive_balance():
-    return BankAccount("Bruce Wayne", 100)
+    return BankAccount("111111112222222233333333", "Bruce Wayne", 100)
 
 def test_deposit_into_positive_balance_account(account_with_postive_balance):
     account_with_postive_balance.deposit(50)
@@ -12,7 +12,7 @@ def test_deposit_into_positive_balance_account(account_with_postive_balance):
 
 @pytest.fixture
 def account_with_zero_balance():
-    return BankAccount("Peter Parker", 0)
+    return BankAccount("123456780000000011223344", "Peter Parker", 0)
 
 def test_withdraw_from_zero_balance_account(account_with_zero_balance):
     with pytest.raises(ValueError):
@@ -28,6 +28,17 @@ def test_deposit_invalid_input(account_with_postive_balance, amount, expected_ex
     with pytest.raises(expected_exception):
         account_with_postive_balance.deposit(amount)
 
+# BankAccount létrehozása nem megfelelő számlaszámokkal
+@pytest.mark.parametrize("account_number, expected_exception", [
+    ("12345678123456781234567", ValueError),  # test with less than 24 digits
+    ("HU0212345678945612000000", ValueError),  # test with alphanumeric characters
+    ("", ValueError),  # test with empty string value
+    (None, ValueError)  # test with empty string value
+])
+def test_account_init_with_account_number(account_number, expected_exception):
+    with pytest.raises(expected_exception):
+        account = BankAccount(account_number, "Gombóc Artúr", 100.00)
+
 # fixture nem BankAccount class-ra
 @pytest.fixture
 def owner():
@@ -40,3 +51,10 @@ def test_transfer_to_non_bank_account(account_with_postive_balance, owner):
     with pytest.raises(TypeError):
         account_with_postive_balance.transfer(20, owner)
 
+# Transfer ugyanarra a számlaszámra
+def test_transfer_to_the_same_account():
+    src_account = BankAccount("111111112222222233333333","Gombóc Artúr",100.00)
+    dest_account = BankAccount("111111112222222233333333","Festéktüsszentő Hapcibenő",100.00)
+
+    with pytest.raises(ValueError):
+        src_account.transfer(55.50, dest_account)
