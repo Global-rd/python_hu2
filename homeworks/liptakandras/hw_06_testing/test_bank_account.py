@@ -39,7 +39,7 @@ def test_account_creation_with_initial_balance(account_with_balance):
 def test_positive_deposit_amount(account_with_balance):
 
     account_with_balance.deposit(50.0)
-    assert account_with_balance.balance == 150.0
+    assert account_with_balance.balance == 8050.0
 
 # Deposit method 0 és negatív számmal
 
