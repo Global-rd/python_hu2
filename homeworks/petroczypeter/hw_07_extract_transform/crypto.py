@@ -57,7 +57,7 @@ if response.status_code == 200:
 
     # Let's check the dataframe
     print("DataFrame information:")
-    print(df.info())
+    df.info()
 
     # print the first 5 rows to check the data
     print("First 5 rows of the DataFrame:")
