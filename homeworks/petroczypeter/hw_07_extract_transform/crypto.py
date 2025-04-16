@@ -84,7 +84,7 @@ print("Task-02: Total market cap")
 print(f"Total market cap: ${total_market_cap:,.2f}")
 logger.info("Total market cap calculation completed")
 
-# Create a new DAtaFrame with the top 50 cryptocurrencies by current price
+# Create a new DataFrame with the top 50 cryptocurrencies by current price
 logger.info("Task-03: Creating top 50 cryptocurrencies by current price")
 # Sort by current_price in desc
 sorted_df = df.sort_values(by="current_price", ascending=False)
