@@ -13,7 +13,7 @@ data = response.json()
 df = pd.DataFrame(data)
 
 zero_cell = df.isnull().sum()
-print("Number of zero cells: " + zero_cell)
+print("Number of zero cells: " , zero_cell)
 
 market_cap = df["market_cap"].sum()
 print(f"\nMarket cap: {market_cap:,.2f}")
@@ -32,4 +32,4 @@ def direction_value(i):
 
 top50_df["change_direction"] = top50_df["price_change_percentage_24h"].apply(direction_value)
 
-print("\nTop 50 crypto: " + top50_df.head())
+print("\nTop 50 crypto: " , top50_df.head())
