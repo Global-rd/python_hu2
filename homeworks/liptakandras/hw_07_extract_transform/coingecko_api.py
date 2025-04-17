@@ -23,7 +23,7 @@ print(f"Total market cap: {market_cap_total}")
 
 top50_df = data_frames.sort_values(by="current_price", ascending=False).head(50)
 
-top50_df = data_frames.sort_values(by="price_change_percentage_24h", ascending=False).head(50) 
+top50_df = data_frames.sort_values(by="price_change_percentage_24h", ascending=False)
     # itt nem tudom, kell-e új változó név, most nem adtam neki, tehát a meglévőt módosítom
 
 def change_direction(pct):  # funkció if feltételekkel, amit később meghívhatok
