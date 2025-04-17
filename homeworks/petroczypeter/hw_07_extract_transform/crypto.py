@@ -53,6 +53,7 @@ if response.status_code == 200:
         logger.info(f"Data ordering check: {is_ordered}")
 
     # convert response to pd DataFrame
+    df = pd.DataFrame(crypto_data)
     logger.info(f"Created DataFrame with shape: {df.shape}")
 
     # Let's check the dataframe
