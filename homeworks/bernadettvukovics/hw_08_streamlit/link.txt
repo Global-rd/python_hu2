@@ -1,0 +1,2 @@
+Az alkalmazáshoz link:
+https://pyappapp-drcdgxxedzkkzpwm4hww55.streamlit.app/
