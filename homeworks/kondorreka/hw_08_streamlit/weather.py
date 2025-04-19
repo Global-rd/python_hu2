@@ -23,7 +23,7 @@ city = st.text_input("Enter City name: (e.g.: Washington, London)", value = "Bud
 data = weather_city(city)
 print(data)
 
-st.header(f'Current Weather in {city}')
+st.header(f'Current Weather in {city.title()}')
 
 def process_data(data):
 
@@ -57,9 +57,8 @@ if data:
             st.metric(label="Humidity (%)", value=f"{df['humidity'].iloc[-1]:,.0f}%")
         with kpi3:
             st.metric(label="Wind speed (m/s)", value=f"{df['speed'][-30:].max():,.2f} m/s")
-
+        st.header(f'Weather map')
+        st.map(df)
 else:
     st.error(f"No data available. Check City!")
 
-st.header(f'Weather map')
-st.map(df)
