@@ -38,7 +38,6 @@ top50_df["change_direction"] = top50_df["price_change_percentage_24h"].apply(get
 print("\nTop 5 érme a change_direction szerint:")
 print(top50_df[["name", "current_price", "price_change_percentage_24h", "change_direction"]].head())
 
-top50_df.to_excel("top50_crypto.xlsx", index=False)
+top50_df.to_excel("homeworks/baloghpeter/hw_07_extract_transform/top50_crypto.xlsx", index=False)
 
 print("\nA top50_df sikeresen elmentve Excel fájlba: top50_crypto.xlsx")
-
