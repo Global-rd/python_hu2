@@ -7,20 +7,23 @@ class Car:
         self.fuel_level = 100.0  # %
 
     def drive(self, distance):
+        if distance < 0:
+            raise ValueError("A megtett távolság nem lehet negatív.")
+        
         required_fuel = distance * 0.1
         if self.fuel_level >= required_fuel:
             self.mileage += distance
             self.fuel_level -= required_fuel
-            print(f"{self.brand} {self.model} megtett {distance} km-t.")
+            print(f"[{self.brand} {self.model}] Vezetve: {distance} km, Üzemanyag: {self.fuel_level:.1f}%")
         else:
-            max_distance = self.fuel_level / 0.1
-            self.mileage += max_distance
+            max_possible_km = self.fuel_level / 0.1
+            self.mileage += max_possible_km
             self.fuel_level = 0
-            print(f"{self.brand} {self.model} csak {max_distance:.1f} km-t tudott megtenni, mert kifogyott az üzemanyag.")
+            print(f"[{self.brand} {self.model}] Csak {max_possible_km:.1f} km-t tudott megtenni (üzemanyag elfogyott).")
 
     def refuel(self, amount):
         if amount < 0:
-            print("Hiba: az érték negatív!")
+            raise ValueError("Hiba: az érték negatív!")
             return
         self.fuel_level += amount
         if self.fuel_level > 100:
