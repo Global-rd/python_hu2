@@ -42,3 +42,4 @@ if data:
 else:
     st.warning("Nem sikerült lekérni az időjárási adatokat. Ellenőrizd a város nevét.")
 
+# az előzőt pusholtam de valamiért nem jelent meg githubon
