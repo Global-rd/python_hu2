@@ -48,7 +48,7 @@ def get_weather_forecast(city):
         st.warning(f"Error fetching forecast data: {e}")
         return None
 
-# Create tje DB and table
+# Create the DB and table
 def create_db():
     conn = sqlite3.connect('weather_search_stats.db')
     c = conn.cursor()
