@@ -19,12 +19,12 @@ def main():
                                                            "year": 2025})
     
 
-    #email_sender.send_email(
-    #    recipients=["nigrushid@gmail.com"],
-    #    subject="Test Email",
-    #    body= html_body, #"Szia!"
-    #    attachments=["lessons/lesson_18/to_send.csv"]
-    #)
+    email_sender.send_email(
+        recipients=["nigrushid@gmail.com"],
+        subject="Test Email",
+        body= html_body, #"Szia!"
+        attachments=["lessons/lesson_18/to_send.csv"]
+    )
 
     #telegram message:
 
