@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 API_KEY=st.secrets["openweather"]["openweather_api_key"]
 
 st.set_page_config(
-    page_title="Időjárás Dashboard",
+    page_title="Weather App",
     layout="wide",
     initial_sidebar_state="expanded"
 )
