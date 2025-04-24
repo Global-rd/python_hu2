@@ -5,7 +5,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Időjárás App", layout="wide")
 
-API_KEY = st.secrets["cb808fe1c70d5ccae85de294de6562ba"]
+WEATHER_API_KEY = st.secrets["API_KEY"]
 
 @st.cache_data(ttl=600)
 def get_current_weather(city):
@@ -16,18 +16,18 @@ def get_current_weather(city):
     else:
         return None
 
-st.sidebar.title("🌍 Város kiválasztása")
+st.sidebar.title("Város kiválasztása")
 city = st.sidebar.text_input("Add meg a város nevét:", "Budapest")
 
 data = get_current_weather(city)
 
 if data:
-    st.title(f"☁️ Időjárás jelenleg: {city}")
+    st.title(f"Időjárás jelenleg: {city}")
 
     col1, col2, col3 = st.columns(3)
-    col1.metric("🌡️ Hőmérséklet (°C)", f"{data['main']['temp']}°C")
-    col2.metric("💧 Páratartalom", f"{data['main']['humidity']}%")
-    col3.metric("💨 Szélsebesség", f"{data['wind']['speed']} m/s")
+    col1.metric("Hőmérséklet (°C)", f"{data['main']['temp']}°C")
+    col2.metric("Páratartalom", f"{data['main']['humidity']}%")
+    col3.metric("Szélsebesség", f"{data['wind']['speed']} m/s")
 
     lat = data['coord']['lat']
     lon = data['coord']['lon']
@@ -42,4 +42,4 @@ if data:
 else:
     st.warning("Nem sikerült lekérni az időjárási adatokat. Ellenőrizd a város nevét.")
 
-#közben rájöttem, hogy rossz repoba nyomtam
+st.write("DEBUG: st.secrets = ", dict(st.secrets))
