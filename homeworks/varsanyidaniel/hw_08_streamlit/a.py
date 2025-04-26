@@ -3,8 +3,10 @@ import pandas as pd
 import requests
 import plotly.express as px
 
-API_KEY = st.secrets["polygon"]["api_key"]
+API_KEY=st.secrets["weatherapp111"]["api_key"]
+print(API_KEY)
 
+""""
 @st.cache_data(ttl=3600)
 def collect_data(city, API_KEY):
     url=f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'
@@ -20,3 +22,5 @@ st.title("Robot Dreams Python - Weather Map & Data Visualization App")
 city=st.sidebar.text_input("Enter city name:")
 
 data = collect_data(city)
+"""
+# streamlit run homeworks/varsanyidaniel/hw_08_streamlit/a.py
