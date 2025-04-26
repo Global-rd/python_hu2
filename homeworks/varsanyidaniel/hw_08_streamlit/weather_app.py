@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 import requests
-import plotly.express as px
 
-API_KEY="3f15d1b4271afa08ea7cfddf1733823a" #az st.secrets valamiért nem működött hiába írtám át és ellennőriztem le rengetegszer
+API_KEY=st.secrets["weatherapp"]["apikey"].toml
 
 
 @st.cache_data(ttl=3600)
@@ -36,6 +35,4 @@ if data:
 
 print(data)
 
-
-
-# streamlit run homeworks/varsanyidaniel/hw_08_streamlit/a.py
+# streamlit run homeworks/varsanyidaniel/hw_08_streamlit/weather_app.py
