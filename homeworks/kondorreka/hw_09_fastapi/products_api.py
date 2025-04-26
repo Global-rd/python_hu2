@@ -67,12 +67,12 @@ async def update_product(product_id: UUID, product_update: ProductRequest, db: A
 #- 1 termék törlése id alapján
 @app.delete("/products/{product_id}", response_model=ProductResponse)
 async def delete_product(product_id: UUID, db: AsyncSession = Depends(get_db)):
-    Product = await get_product_by_id(product_id, db)
+    product = await get_product_by_id(product_id, db)
 
-    await db.delete(Product)
+    await db.delete(product)
     await db.commit()
 
-    return Product
+    return product
 
 
 async def get_product_by_id(product_id: UUID, db:AsyncSession):
