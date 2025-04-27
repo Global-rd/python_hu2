@@ -1,8 +1,12 @@
 import streamlit as st
 import pandas as pd
 import requests
+import os
+print(os.getcwd())
+print(st.secrets)
 
-API_KEY=st.secrets["weatherapp"]["apikey"]
+
+API_KEY=st.secrets["weatherapp"]["api_key"]
 
 
 @st.cache_data(ttl=3600)
