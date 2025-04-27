@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 
-API_KEY=st.secrets["weatherapp"]["apikey"].toml
+API_KEY=st.secrets["weatherapp"]["apikey"]
 
 
 @st.cache_data(ttl=3600)
