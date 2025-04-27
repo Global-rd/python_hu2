@@ -7,7 +7,7 @@ import pprint as pp
 APPID = st.secrets["ow"]["appid"]
 BASE_URL = st.secrets["ow"]["base_url"]
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=600)
 def get_current_weather(city, unit, lang):
     print(f"Get weather for {city}, {unit}, {lang}...")
 
@@ -20,7 +20,7 @@ def get_current_weather(city, unit, lang):
     else:
         st.error(f"Failed to fetch data: {response.status_code} - {response.text}")
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=6000)
 def get_weather_forecast(city, unit, lang):
 
     url = f"{BASE_URL}/forecast?appid={APPID}&q={city}&units={unit}&lang={lang}"
