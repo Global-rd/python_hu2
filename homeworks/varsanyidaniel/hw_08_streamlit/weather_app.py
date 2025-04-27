@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
 import requests
-import os
-print(os.getcwd())
-print(st.secrets)
-
 
 API_KEY=st.secrets["weatherapp"]["api_key"]
 
@@ -40,3 +36,5 @@ if data:
 print(data)
 
 # streamlit run homeworks/varsanyidaniel/hw_08_streamlit/weather_app.py
+
+# WEBSITE LINK: https://python02weatherapp.streamlit.app/
