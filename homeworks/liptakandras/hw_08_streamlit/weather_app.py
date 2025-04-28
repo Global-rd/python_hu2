@@ -4,7 +4,7 @@ import streamlit as st
 import requests
 import pandas as pd
 
-@st.cache_data
+@st.cache_data(ttl=1800)
 
 def get_current_weather_data(city, api_key):
 
