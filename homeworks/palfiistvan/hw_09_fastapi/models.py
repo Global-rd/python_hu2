@@ -12,7 +12,7 @@ class WsItem(Base):
     item_name: Mapped[str] = Column(String, nullable=False)
     quantity: Mapped[int] = Column(Integer, nullable=False)
     price: Mapped[int] = Column(Integer, nullable=False)
-    category: Mapped[str] = Column(String, nullable=False)
+    category: Mapped[Optional[str]] = Column(String, nullable=True)
 
 #pydantic model
 class WsItemRequest(BaseModel):
@@ -22,5 +22,4 @@ class WsItemRequest(BaseModel):
     category: Optional[str]
 
 class WsItemResponse(WsItemRequest):
-    id: UUID
-
+    id: str
