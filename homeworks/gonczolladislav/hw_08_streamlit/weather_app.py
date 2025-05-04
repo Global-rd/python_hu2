@@ -6,7 +6,7 @@ import pandas as pd
 
 api_key = st.secrets["OPENWEATHERMAP_API_KEY"]
 
-DATABASE_NAME = "weather_history.db"
+DATABASE_NAME = "homeworks\gonczolladislav\hw_08_streamlit\weather_history.db"
 WEATHER_TABLE_NAME = "weather_data"
 
 def create_weather_table():
@@ -76,12 +76,15 @@ if city:  # Ha a felhasználó megadott egy városnevet
         except KeyError:
             st.warning("A város koordinátái nem találhatóak.")
 
-        log_weather_data(
-            city=city,
-            temperature=weather_data['main']['temp'],
-            humidity=weather_data['main']['humidity'],
-            wind_speed=weather_data['wind']['speed']
-        )
+        if 'last_logged_city' not in st.session_state or st.session_state.last_logged_city != city:
+            log_weather_data(
+                city=city,
+                temperature=weather_data['main']['temp'],
+                humidity=weather_data['main']['humidity'],
+                wind_speed=weather_data['wind']['speed']
+            )
+            st.session_state.last_logged_city = city
+        
     else:
         st.warning("Kérlek, adj meg egy létező városnevet.")
 
