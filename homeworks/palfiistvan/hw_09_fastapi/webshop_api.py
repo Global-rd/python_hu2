@@ -15,13 +15,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.get("/Webshop/", response_model=List[WsItemResponse])
+@app.get("/webshop/", response_model=List[WsItemResponse])
 async def get_wsitem(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(WsItem)) #SELECT * FROM Webshop
     Webshop = result.scalars().all()
     return Webshop
 
-@app.post("/Webshop/", response_model=WsItemResponse)
+@app.post("/webshop/", response_model=WsItemResponse)
 async def add_wsitem(wsitem:WsItemRequest, db: AsyncSession = Depends(get_db)):
     new_wsitem = WsItem(**wsitem.model_dump())
 
@@ -30,13 +30,13 @@ async def add_wsitem(wsitem:WsItemRequest, db: AsyncSession = Depends(get_db)):
     await db.refresh(new_wsitem)
     return new_wsitem
 
-@app.get("/Webshop/{wsitem_id}", response_model=WsItemResponse)
+@app.get("/webshop/{wsitem_id}", response_model=WsItemResponse)
 async def get_wsitem(wsitem_id: UUID, db: AsyncSession = Depends(get_db)):
     wsitem = await get_wsitem_by_id(wsitem_id, db)
     return wsitem 
 
 
-@app.put("/Webshop/{wsitem_id}", response_model=WsItemResponse)
+@app.put("/webshop/{wsitem_id}", response_model=WsItemResponse)
 async def update_wsitem(wsitem_id: UUID, wsitem_update: WsItemRequest, db: AsyncSession = Depends(get_db)):
     wsitem = await get_wsitem_by_id(wsitem_id, db)
 
@@ -49,7 +49,7 @@ async def update_wsitem(wsitem_id: UUID, wsitem_update: WsItemRequest, db: Async
     return wsitem
 
 
-@app.delete("/Webshop/{wsitem_id}", response_model=WsItemResponse)
+@app.delete("/webshop/{wsitem_id}", response_model=WsItemResponse)
 async def delete_wsitem(wsitem_id: UUID, db: AsyncSession = Depends(get_db)):
     wsitem = await get_wsitem_by_id(wsitem_id, db)
 
