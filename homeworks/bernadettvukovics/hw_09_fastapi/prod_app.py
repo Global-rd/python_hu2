@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends
+from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from database import AsyncSessionLocal, engine, Base
@@ -9,9 +10,9 @@ import uvicorn
 app = FastAPI(title="Webshop Termék API")
 
 # Dependency
-async def get_session() -> AsyncSession:
-    async with AsyncSessionLocal() as session:
-        yield session
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:  # SessionLocal az aszinkron session maker
+        yield session  # A session-t generáljuk és visszaadjuk
 
 # Create DB table
 @app.on_event("startup")
@@ -49,7 +50,7 @@ async def update_product(product_id: str, update: ProductUpdate, session: AsyncS
 
     for key, value in update.dict(exclude_unset=True).items():
         setattr(db_product, key, value)
-    
+
     await session.commit()
     await session.refresh(db_product)
     return db_product
@@ -64,5 +65,3 @@ async def delete_product(product_id: str, session: AsyncSession = Depends(get_se
     await session.delete(db_product)
     await session.commit()
     return {"detail": "Product deleted"}
-
-# uvicorn prod_app:app --reload

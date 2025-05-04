@@ -1,4 +1,4 @@
-import uuid
+from uuid import UUID
 from sqlalchemy import Column, String, Integer
 from database import Base
 from pydantic import BaseModel
@@ -7,7 +7,7 @@ from typing import Optional
 # SQLAlchemy model
 class Product(Base):
     __tablename__ = "products"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid1)
+    id = Column(String, primary_key=True, default=lambda: str(uuid1()))
     item_name = Column(String, nullable=False)
     quantity = Column(Integer, nullable=False)
     price = Column(Integer, nullable=False)
