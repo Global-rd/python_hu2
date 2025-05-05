@@ -3,7 +3,7 @@ from sqlalchemy import Column, String, Integer
 from database import Base
 from pydantic import BaseModel
 from typing import Optional
-
+from uuid import uuid1      #import uuid1
 # SQLAlchemy model
 class Product(Base):
     __tablename__ = "products"
