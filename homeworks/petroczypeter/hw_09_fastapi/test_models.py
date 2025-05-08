@@ -81,7 +81,7 @@ def retrieve_product(product_id):
     Args:
         product_id: The uuid of the product
         
-    Returns: either the product or Non if not found
+    Returns: either the product or None if not found
     """
     print("\n--- Retrieving Product ---")
     
