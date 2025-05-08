@@ -1,5 +1,5 @@
 """
-Now we define the data modells for our webshop inventory application.
+Now we define the data models for our webshop inventory application.
 It includes both SQLAlchemy models for the database and Pydantic models for the API.
 """
 import uuid
