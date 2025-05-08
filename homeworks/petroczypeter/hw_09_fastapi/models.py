@@ -81,7 +81,7 @@ class ProductResponse(ProductBase):
     """
     Model for product responses from the API.
     
-    This includes all the base fields plusz the ID.
+    This includes all the base fields plus the ID.
     """
     id: str  # Product ID (will be included in responses)
     
