@@ -114,4 +114,4 @@ if __name__ == "__main__":
     if connection_result and file_result:
         print("All tests passed! Database is ready to use. Yay!")
     else:
-        print("Ajjajj! Some tests failed. Please check the errors above.")
+        print("Some tests failed. Please review the errors above and address them.")
