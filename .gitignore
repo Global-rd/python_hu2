@@ -56,3 +56,6 @@ coverage.xml
 #Log
 *.log
 streamlit-test_pi/
+
+# Specific DB files
+webshop.db
