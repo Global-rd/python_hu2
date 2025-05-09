@@ -1,8 +1,8 @@
-from database import Base, engine, get_db
 from models import Product, ProductRequest, ProductResponse
 from fastapi import FastAPI, HTTPException, Depends
-from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import AsyncSession
+from contextlib import asynccontextmanager
+from database import Base, engine, get_db
 from sqlalchemy.future import select
 from typing import List
 from uuid import UUID
