@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from typing import Optional
 from database import Base
 
-#database model
+
 class Product(Base):
     __tablename__ = "products"
     id: Mapped[str] = Column(String, primary_key=True, default=lambda: str(uuid1()))
@@ -14,7 +14,7 @@ class Product(Base):
     price: Mapped[int] = Column(Integer, nullable=False)
     category: Mapped[str] = Column(String, nullable=False)
 
-#pydantic model
+
 class ProductRequest(BaseModel):
 
     item_name: str
@@ -24,3 +24,4 @@ class ProductRequest(BaseModel):
 
 class ProductResponse(ProductRequest):
     id: UUID
+print(1)
