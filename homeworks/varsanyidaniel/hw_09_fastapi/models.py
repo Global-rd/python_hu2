@@ -24,4 +24,3 @@ class ProductRequest(BaseModel):
 
 class ProductResponse(ProductRequest):
     id: UUID
-print(1)
