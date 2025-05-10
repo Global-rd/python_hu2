@@ -52,7 +52,7 @@ async def update_product(id: str, updated_product: ProductRequest, db: AsyncSess
     return product
 
 # Delete product
-@app.delete("/product/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@app.delete("/product/{id}", response_model=ProductResponse)
 async def delete_product(id: str, db: AsyncSession = Depends(get_db)):
     product = await db.get(Product, id)
     if not product:
@@ -60,3 +60,4 @@ async def delete_product(id: str, db: AsyncSession = Depends(get_db)):
 
     await db.delete(product)
     await db.commit()
+    return product
