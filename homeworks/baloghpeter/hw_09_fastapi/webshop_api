@@ -1,0 +1,4 @@
+webshop_api/
+├── fastapi.py             
+└── requirements.txt   
+
