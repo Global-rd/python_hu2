@@ -63,6 +63,7 @@ def scrape_quotes():
     df.to_csv("quotes.csv", index=False, encoding='utf-8')
     print("Scraping complete. Data saved to quotes.csv.")
 
+
 # Indítjuk el a scrape folyamatot
 scrape_quotes()
 
