@@ -60,9 +60,9 @@ def scrape_authors_quotes_tags(driver, tags: list, timeout=10):
 
                 next_button.click()
 
-                quotes_div = driver.find_elements(by=By.XPATH, value=TSS.get_quotes_div_xpath())
-
                 WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, TSS.get_quotes_div_xpath())))
+
+                quotes_div = driver.find_elements(by=By.XPATH, value=TSS.get_quotes_div_xpath())
 
                 for quote_div in quotes_div:
 
