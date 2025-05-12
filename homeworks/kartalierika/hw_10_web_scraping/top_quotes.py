@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
+import os
 
 driver = webdriver.Chrome()
 driver.get("https://quotes.toscrape.com/")
@@ -34,11 +35,10 @@ for tag in top_10_tags:
         except:
             break 
 
-
-
 df = pd.DataFrame(quotes_list)
-df.to_csv("top10_tag_quotes.csv", index=False, encoding="utf-8")
-print("Saved to CSV file.")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, "top10_tag_quotes.csv")
+df.to_csv(csv_path, index=False, encoding="utf-8")
+print(f"Saved to CSV file.")
 
 driver.quit()
-
