@@ -1,6 +1,6 @@
 from quotes_scraper import QuotesScraper
 import os
-import time
+
 import pandas as pd
 
 

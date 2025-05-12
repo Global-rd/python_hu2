@@ -71,9 +71,8 @@ class QuotesScraper:
 
 
     def scrape_quotes_all_pages(self, url):
-        all_data = []
-
         
+
         print(f"Oldal betöltése: {url}")
         self.driver.get(url)
         
@@ -81,64 +80,29 @@ class QuotesScraper:
             EC.presence_of_all_elements_located((By.XPATH, quot.get_quotes_block_xpath()))
         )
 
-        # Az oldal összes idézetblokkja
-        quote_blocks = self.driver.find_elements(By.XPATH, quot.get_quotes_block_xpath())
-
-        for block in quote_blocks:
-            quote_text = block.find_element(By.XPATH, quot.get_quote_text_xpath()).text
-            quote_author = block.find_element(By.XPATH, quot.get_quote_author_xpath()).text
-            tag = block.find_element(By.XPATH, quot.get_quote_tag_xpath()).text
-
-            all_data.append({
-                "tag": tag,
-                "quote": quote_text,
-                "author": quote_author
-                })
-
-        print(f"Kész: {url}")
-       
-        return all_data
-
-    def scrape_quotes_top_ten_tags(self, url, tag):
-        print(f"Scraping: {url}")
-        self.driver.get(url)
-
         data = []
 
         #Összes idézetblokk keresése
         quote_blocks = self.driver.find_elements(By.XPATH, quot.get_quotes_block_xpath())
 
         for block in quote_blocks:
-            quote_text = block.find_element(By.XPATH, quot.get_quote_text_xpath()).text
-            quote_author = block.find_element(By.XPATH, quot.get_quote_author_xpath()).text
+            quote_text = block.find_element(By.XPATH, './/span[1]').text
+            quote_author = block.find_element(By.XPATH, './/span/small').text
+            quote_tags = block.find_elements(By.XPATH, './/div/a')
+
+            tags = []
+            for i in quote_tags:
+                tags.append(i.text)
 
             data.append({
-                "tag": tag,
+                "tag": ", ".join(tags),
                 "quote": quote_text,
                 "author": quote_author
-         })
+            })
 
         return data
     
-    def get_urls_from_top_tags(self):
-        self.initialize_webdriver()  # Selenium induljon el
-        tags = self.get_top_tags()
-        urls = []
-
-        for tag in tags:
-            i = 1
-            while True:
-                url = f"https://quotes.toscrape.com/tag/{tag}/page/{i}/"
-                self.driver.get(url)
-                quote_blocks = self.driver.find_elements(By.XPATH, quot.get_quotes_block_xpath())
-                if not quote_blocks:
-                 break
-                urls.append(url)
-                i += 1
-
-        return urls
-
-  
+ 
     @staticmethod
     def load_results_to_csv(data, filepath):
         df = pd.DataFrame(data)
