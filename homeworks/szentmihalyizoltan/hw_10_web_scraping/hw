@@ -1,0 +1,64 @@
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+BASE_URL = "https://quotes.toscrape.com"
+
+def setup_driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+def get_top_tags(driver, count=10):
+    driver.get(BASE_URL)
+    tags_box = driver.find_element(By.CLASS_NAME, "tags-box")
+    tag_elements = tags_box.find_elements(By.TAG_NAME, "a")
+    return [tag.text for tag in tag_elements[:count]]
+
+def scrape_quotes_for_tag(driver, tag):
+    tag_url = f"{BASE_URL}/tag/{tag}/"
+    quotes_data = []
+
+    while True:
+        driver.get(tag_url)
+        quotes = driver.find_elements(By.CLASS_NAME, "quote")
+
+        for quote in quotes:
+            text = quote.find_element(By.CLASS_NAME, "text").text
+            author = quote.find_element(By.CLASS_NAME, "author").text
+            quotes_data.append({
+                "tag": tag,
+                "author": author,
+                "quote": text
+            })
+
+        try:
+            next_btn = driver.find_element(By.CLASS_NAME, "next")
+            next_link = next_btn.find_element(By.TAG_NAME, "a").get_attribute("href")
+            tag_url = next_link
+        except:
+            break  
+    return quotes_data
+
+def main():
+    driver = setup_driver()
+    all_quotes = []
+
+    try:
+        top_tags = get_top_tags(driver)
+        print("Top 10 tag:", top_tags)
+
+        for tag in top_tags:
+            print(f"Scraping tag: {tag}")
+            quotes = scrape_quotes_for_tag(driver, tag)
+            all_quotes.extend(quotes)
+
+        df = pd.DataFrame(all_quotes)
+        df.to_csv("quotes_top_10_tags.csv", index=False, encoding="utf-8")
+    finally:
+        driver.quit()
+
+if __name__ == "__main__":
+    main()
