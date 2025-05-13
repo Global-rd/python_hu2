@@ -17,7 +17,8 @@ def get_top_tags():
     tags  = driver.find_elements(By.CLASS_NAME, 'tag-item')
     # Csak az első 10 tag szövegének kinyerése
     toptags = [tag.text for tag in tags[:10]]
-    
+
+
     return toptags
 
 # Funkció, amely a tag-ek idézeteit lekéri
