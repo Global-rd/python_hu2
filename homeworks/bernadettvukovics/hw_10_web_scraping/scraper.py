@@ -13,12 +13,10 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 def get_top_tags():
     driver.get("https://quotes.toscrape.com/")
     time.sleep(2)
-    
+
     tags  = driver.find_elements(By.CLASS_NAME, 'tag-item')
     # Csak az első 10 tag szövegének kinyerése
     toptags = [tag.text for tag in tags[:10]]
-
-
     return toptags
 
 # Funkció, amely a tag-ek idézeteit lekéri
