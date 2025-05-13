@@ -17,7 +17,7 @@ class QuotesScraper:
 
     def get_top_tags(self, url="https://quotes.toscrape.com/"):
         self.driver.get(url)
-        # tag_elements = self.driver.find_elements(By.CSS_SELECTOR, sel.get_tag_items_selector())
+        tag_elements = self.driver.find_elements(By.CSS_SELECTOR, sel.get_tag_items_selector())
         return [tag.text for tag in tag_elements[:10]]
 
     def get_quotes_for_tag(self, tag):
