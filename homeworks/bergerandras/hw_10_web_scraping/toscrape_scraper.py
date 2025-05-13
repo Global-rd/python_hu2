@@ -5,33 +5,6 @@ from selenium.webdriver.common.by import By
 
 import toscrape_selectors as TSS
 
-def scrape_next_page(driver, quotes_list: list, authors_list: list, tags_list: list, tag, timeout=10):
-
-    next_button = driver.find_element(by=By.XPATH, value=TSS.get_next_button_xpath())
-
-    next_button.click()
-
-    WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, TSS.get_quotes_div_xpath())))
-
-    quotes_div = driver.find_elements(by=By.XPATH, value=TSS.get_quotes_div_xpath())
-
-    for quote_div in quotes_div:
-                    
-        quote = quote_div.find_element(by=By.XPATH, value='./span[1]')
-        author = quote_div.find_element(by=By.XPATH, value='./span[2]/small')
-
-        quotes_list.append(quote.text.strip())
-        authors_list.append(author.text.strip())
-        tags_list.append(tag)
-
-    try:
-
-        scrape_next_page(driver, quotes_list, authors_list, tags_list, tag)
-
-    except:
-
-        return [quotes_list, authors_list, tags_list]
-
 def scrape_top10_tags(driver, timeout=10):
 
     tags = []
@@ -56,7 +29,7 @@ def scrape_top10_tags(driver, timeout=10):
 
         driver.quit()
 
-def scrape_authors_quotes_tags(driver, tags: list, timeout=10):
+def scrape_authors_quotes_tags(driver, tags: list):
 
     quotes_list = []
     authors_list = []
@@ -64,35 +37,35 @@ def scrape_authors_quotes_tags(driver, tags: list, timeout=10):
 
     for tag in tags:
 
-        driver.get(f"https://quotes.toscrape.com/tag/{tag}/")
+        print(f"Scraping tag: {tag}")
 
-        try:
+        page = 1
 
-            WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, TSS.get_quotes_div_xpath())))
+        while True:
+
+            driver.get(f"https://quotes.toscrape.com/tag/{tag}/page/{page}/")
 
             quotes_div = driver.find_elements(by=By.XPATH, value=TSS.get_quotes_div_xpath())
 
+            if not quotes_div:
+
+                break 
+
             for quote_div in quotes_div:
 
-                quote = quote_div.find_element(by=By.XPATH, value='./span[1]')
-                author = quote_div.find_element(by=By.XPATH, value='./span[2]/small')
+                try:
+                    
+                    quote = quote_div.find_element(by=By.XPATH, value=TSS.get_quote_xpath())
+                    author = quote_div.find_element(by=By.XPATH, value=TSS.get_author_xpath())
 
-                quotes_list.append(quote.text.strip())
-                authors_list.append(author.text.strip())
-                tags_list.append(tag)
+                    quotes_list.append(quote.text.strip())
+                    authors_list.append(author.text.strip())
+                    tags_list.append(tag)
 
-            try:
-                
-                quotes_list, authors_list, tags_list = scrape_next_page(driver, quotes_list, authors_list, tags_list, tag, timeout=10)
+                except:
 
-            except:
+                    continue
 
-                pass
-
-        except TimeoutException:
-
-            print("Quotes did not load in time!")
-
-            driver.quit()
+            page += 1
 
     return [quotes_list, authors_list, tags_list]
