@@ -14,14 +14,11 @@ def get_top_tags():
     driver.get("https://quotes.toscrape.com/")
     time.sleep(2)
     
-    # Top 10 tag összegyűjtése
-    tags = driver.find_elements(By.CSS_SELECTOR, 'a[href^="/tag/"]')
-    unique_tags = set()
+    tags  = driver.find_elements(By.CLASS_NAME, 'tag-item')
+    # Csak az első 10 tag szövegének kinyerése
+    toptags = [tag.text for tag in tags[:10]]
     
-    for tag in tags:
-        unique_tags.add(tag.text)
-    
-    return list(unique_tags)[:10]
+    return toptags
 
 # Funkció, amely a tag-ek idézeteit lekéri
 def get_quotes_for_tag(tag):
