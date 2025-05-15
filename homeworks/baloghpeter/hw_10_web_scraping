@@ -1,0 +1,60 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
+import time
+import csv
+
+# Setup Selenium
+options = Options()
+options.add_argument("--headless")  # ha nem kell a GUI
+driver = webdriver.Chrome(options=options)
+
+# 1. Lépés: Top 10 tag összegyűjtése
+driver.get("https://quotes.toscrape.com/")
+time.sleep(1)
+
+top_tags_elements = driver.find_elements(By.CSS_SELECTOR, ".tags-box .tag")
+top_tags = [tag.text for tag in top_tags_elements[:10]]
+
+print("Top 10 tag:", top_tags)
+
+# 2. Lépés: Minden taghez tartozó idézetek kigyűjtése
+data = []
+
+for tag in top_tags:
+    page = 1
+    while True:
+        url = f"https://quotes.toscrape.com/tag/{tag}/page/{page}/"
+        driver.get(url)
+        time.sleep(1)
+
+        quotes = driver.find_elements(By.CLASS_NAME, "quote")
+        if not quotes:
+            break  # nincs több oldal
+
+        for quote in quotes:
+            text = quote.find_element(By.CLASS_NAME, "text").text.strip()
+            author = quote.find_element(By.CLASS_NAME, "author").text.strip()
+            tags = [t.text for t in quote.find_elements(By.CLASS_NAME, "tag")]
+
+            # Csak akkor vesszük fel, ha az aktuális top10 tag benne van
+            if tag in tags:
+                data.append({
+                    "tag": tag,
+                    "author": author,
+                    "quote": text
+                })
+        page += 1
+
+# 3. Lépés: CSV-be írás
+with open("quotes_top10_tags.csv", "w", newline="", encoding="utf-8") as csvfile:
+    fieldnames = ["tag", "author", "quote"]
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for row in data:
+        writer.writerow(row)
+
+driver.quit()
+print("Kész! Az adatok a 'quotes_top10_tags.csv' fájlban vannak.")
