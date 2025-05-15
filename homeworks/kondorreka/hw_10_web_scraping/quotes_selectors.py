@@ -5,7 +5,9 @@ def get_top_tags_xpath() -> str:
 #összes blokk megkereséde
 def get_quotes_block_xpath() -> str:
     #return '//div[@class="quote"]'
-    return '/html/body/div/div[2]/div[1]/div[2]'
+    #return '/html/body/div/div[2]/div[1]/div[2]'
+    return '/html/body/div/div[2]/div[1]/div'
+
 
 
 # Blokból idézet szövege

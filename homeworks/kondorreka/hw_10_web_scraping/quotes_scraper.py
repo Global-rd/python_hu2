@@ -13,21 +13,15 @@ import quotes_selectors as quot
 class QuotesScraper:
 
     def get_urls_from_quotes(self):
-        print("Requesting all quotes urls from Quotes To Scrape's sitemap")
+        print("Top 10 tag URL-jeinek összeállítása...")
+        base_url = "https://quotes.toscrape.com/tag/"
+    
+        tags = self.get_top_tags()  
 
-        base_url = "https://quotes.toscrape.com/page/"
-        urls = []
-        i = 1
-        while True:
-            url = f"{base_url}{i}/"
-            response = requests.get(url)
-            if "No quotes found!" in response.text:
-                break
-            urls.append(url)
-            i += 1
+        urls = [f"{base_url}{tag}/" for tag in tags]
 
-        print(f"{len(urls)} URL összegyűjtve.")
-        print("URL-ek:", urls[:5])
+        print(f"{len(urls)} URL készült.")
+        print("Első néhány URL:", urls[:5])
         return urls
     
     #url-ek kiírása text fileba    

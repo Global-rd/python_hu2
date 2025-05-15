@@ -9,6 +9,8 @@ def main():
     URLS_FILE_PATH = "homeworks/kondorreka/hw_10_web_scraping/all_quotes_urls.txt"
     SCRAPED_DATA_PATH = "homeworks/kondorreka/hw_10_web_scraping/quotes_all_quotes.csv"
 
+    scraper.initialize_webdriver()
+    
     if os.path.exists(URLS_FILE_PATH): #ha létezik a all_quotes_urls.txt
         print("URL list already exists, reading from file.")
         urls = scraper.read_urls_from_file(URLS_FILE_PATH)
@@ -18,7 +20,7 @@ def main():
         scraper.write_urls_to_file(urls, URLS_FILE_PATH)
 
     print(urls)
-    scraper.initialize_webdriver()
+    
 
     all_quotes = []
     for url in urls:
