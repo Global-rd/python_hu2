@@ -24,7 +24,7 @@ def get_all_quotes_in_one_page(driver, actual_link, one_tag_name):
 
 def main():
     
-    BASE_URL = "https://quotes.toscrape.com/"
+    BASE_URL = "https://quotes.toscrape.com"
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
@@ -44,14 +44,17 @@ def main():
 
     for one_tag in name_of_top10_tags:
         link = f"{BASE_URL}/tag/{one_tag}/"
-        list_of_quotes.extend(get_all_quotes_in_one_page(driver, link, one_tag))
-        # Ha nem fért el minden egy oldalon, sajnos ezt csak később vettem észre
-        try:
-            driver.find_element(By.XPATH, value=qs.get_next_page_link())
-            link = f"{link}page/2/"
+        
+        while True:
+            
             list_of_quotes.extend(get_all_quotes_in_one_page(driver, link, one_tag))
-        except:
-            pass
+            
+            try:
+                next_button = driver.find_element(By.CSS_SELECTOR, "ul.pager li.next a")
+                link = next_button.get_attribute("href")
+                
+            except:
+                break
 
     df = pd.DataFrame(list_of_quotes)
     df.to_csv("list_of_quotes.csv", index=False, encoding="utf-8")
