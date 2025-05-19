@@ -1,5 +1,5 @@
 import uuid
-from homeworks.baloghpeter.hw_09_fastapi.apiprogram import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional, List
 
