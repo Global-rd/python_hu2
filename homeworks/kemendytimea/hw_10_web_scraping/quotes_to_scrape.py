@@ -13,18 +13,15 @@ csv_file_path = os.path.join(script_dir, 'quotes_to_scrape.csv')
 if os.path.exists(csv_file_path):
     os.remove(csv_file_path)
 
-driver_path = r"C:\Users\kemen\Desktop\Pythonhoz\chromedriver-win64\chromedriver.exe"
-
-service = Service(driver_path)
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome()
 
 wait = WebDriverWait(driver, 10)
 
 driver.get("https://quotes.toscrape.com/")
 
 tags = []
-tag_elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'tag')))
-for tag in tag_elements[:10]:
+tag_elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'tag-item')))
+for tag in tag_elements:
     tags.append(tag.text)
 
 print("Top 10 tag:", tags)
