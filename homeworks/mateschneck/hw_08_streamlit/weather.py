@@ -62,3 +62,5 @@ if city:
                       markers=True)
         fig.update_layout(xaxis_tickformat="%m-%d %H:%M", xaxis_title="Dátum", yaxis_title="Hőmérséklet (°C)")
         st.plotly_chart(fig, use_container_width=True)
+
+# deployed app: https://weatherhazi08.streamlit.app/
