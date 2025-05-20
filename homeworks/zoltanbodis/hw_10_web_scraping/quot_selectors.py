@@ -1,8 +1,8 @@
-def get_top10_tag_xpath() -> str:
-    return '//span[@class="tag-item"]/a'
+def get_top10_tag_div() -> str:
+    return '//div[@class="col-md-4 tags-box"]'
 
-def get_author_xpath() -> str:
-    return '//div[@class="quote"]/span/small[@class="author"]'
+def get_tag_item() -> str:
+    return '//span[@class="tag-item"]/a[@class="tag"]'
 
 def get_quote_xpath() -> str:
     return '//div[@class="quote"]/span[@class="text"]'
