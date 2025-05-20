@@ -45,7 +45,7 @@ class QuotesScraperTest(unittest.TestCase):
         print(f"Found {len(tags)} tags on the homepage")
 
     def test_quote_selectors(self):
-        """Test that the quote selectors wwork."""
+        """Test that the quote selectors work."""
         self.driver.get(self.base_url)
         quotes = self.driver.find_elements(By.CSS_SELECTOR, QUOTE_SELECTOR)
         self.assertTrue(len(quotes) > 0, "No quotes found on the homepage")
