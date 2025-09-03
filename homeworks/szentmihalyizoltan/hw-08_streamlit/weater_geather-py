@@ -1,0 +1,35 @@
+import streamlit as st
+import requests
+
+api_key = st.secrets["openweathermap"]["api_key"]
+
+st.sidebar.title("City Selection")
+city = st.sidebar.text_input("Enter city name", "Budapest")
+
+@st.cache
+def get_current_weather(city, api_key):
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
+st.title(f"Weather Dashboard for {city}")
+
+weather_data = get_current_weather(city, api_key)
+
+if weather_data:
+    # Display KPIs
+    st.header("Weather")
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(label="Temperature", value=f"{weather_data['main']['temp']} °C")
+    with col2:
+        st.metric(label="Humidity", value=f"{weather_data['main']['humidity']} %")
+    with col3:
+        st.metric(label="Wind Speed", value=f"{weather_data['wind']['speed']} m/s")
+  
+else:
+    st.warning("Not existing city name, please try again")
